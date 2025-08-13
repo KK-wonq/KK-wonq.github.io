@@ -140,35 +140,42 @@
       </div>
       <div class="detail-item">
         <p>FireFox3 -> ASAv inside http 접속</p>
+        <p>host 192.168.192.2 에서 host 192.168.192.254 로 보내는 tcp http 허용</p>
         <img src="port_images/FireFox3_to_inside_http.PNG" onclick="openModal(this.src)">
       </div>
       <div class="detail-item">
         <p>FireFox3 -> ASAv inside telnet 접속</p>
+        <p>telnet 은 ASAv에 따로 telnet (IP) (Zone) 명령어로 허용함.</p>
         <img src="port_images/FireFox3_to_inside_telnet.PNG" onclick="openModal(this.src)">
       </div>
       <div class="detail-item">
         <p>Webterm2 -> ASAv dmz telnet 접속</p>
+        <p>동일하게 ASAv에 따로 명령어로 허용.</p>
         <img src="port_images/webterm2_to_dmz_telnet.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
        <div class="detail-item">
         <p>PC1 -> Webterm1 Ping 접속</p>
+        <p>host 192.168.192.3 -> 192.168.64.2 로 보내는 echo, echo-reply 허용</p>
         <img src="port_images/PC1_to_webterm1_ping.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
       <div class="detail-item">
         <p>Webterm1 -> R1 http 접속</p>
+        <p>192.168.64.2 -> 192.168.224.3 로 보내는 http(www) 허용</p>
         <img src="port_images/webterm1_to_R1_http.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
       <div class="detail-item">
         <p>Webterm1 -> R1 telnet 접속</p>
+        <p>192.168.64.2 -> 192.168.224.3 로 보내는 telnet 허용</p>
         <img src="port_images/Webterm1_to_R1_telnet.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
       <div class="detail-item">
         <p>Webterm2 -> PC1 Ping 가능</p>
+        <p>192.168.192.3 -> 192.168.16.1 로 보내는 echo, 응답받는 echo-reply 허용</p>
         <img src="port_images/Webterm2_to_PC1_ping.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
       <div class="detail-item">
         <p>HSRP 구축</p>
-        <p>R3 - Standby, R4 - Active 로 구축</p>
+        <p>R3 - Standby, R4 - Active 장치 만듦</p>
         <img src="port_images/R3_Standby.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
         <img src="port_images/R4_Active.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
