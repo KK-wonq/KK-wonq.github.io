@@ -89,6 +89,7 @@
   <!-- 프로젝트 목록 -->
   <section id="project-list">
     <h2>프로젝트 목록</h2>
+    <hr>
     <div class="projects-grid">
       <div class="project-card" onclick="showProject('gns3')">
         <img src="port_images/default_GNS3_Topol.PNG" alt="GNS3 썸네일">
@@ -127,6 +128,7 @@
     <div class="detail-grid">
       <div class="detail-item">
         <p>FireFox3 -> ASAv inside http 접속</p>
+        <p>정책 : access-list default extended permit tcp host (Fire) host (ASAv) eq www</p>
         <img src="port_images/FireFox3_to_inside_http.PNG" onclick="openModal(this.src)">
       </div>
       <div class="detail-item">
@@ -154,6 +156,7 @@
         <img src="port_images/Webterm2_to_PC1_ping.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
       </div>
       <div class="detail-item">
+        <p>HSRP 구축</p>
         <p>R3 - Standby, R4 - Active 로 구축</p>
         <img src="port_images/R3_Standby.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
         <img src="port_images/R4_Active.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
