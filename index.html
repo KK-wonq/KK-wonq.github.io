@@ -75,7 +75,7 @@
 <body>
   <header>
     <h1>이혜원</h1>
-    <p>포트폴리오 페이지입니다.</p>
+    <p>보안 관련 포트폴리오 페이지입니다.</p>
     <!-- header 내부, 뒤로가기 버튼과 상관없이 넣으면 됨 -->
     <a href="next.html" style="display:inline-block; margin-top:10px; padding:8px 16px; background:#333; color:#fff; border-radius:6px; text-decoration:none;">다음 페이지로 이동 →</a>
   </header>
@@ -87,6 +87,7 @@
       안녕하세요, 저는 이혜원입니다.  
       이 페이지는 저의 포트폴리오로, 다양한 네트워크, 보안, 서버 구축 프로젝트를 확인하실 수 있습니다.  
       각 프로젝트 카드를 클릭하면 상세 내용과 이미지를 볼 수 있습니다.
+      GNS3, HIDS/NIDS, Zabbix, Pfsense, Snort/Suricata
     </p>
   </section>
 
@@ -127,7 +128,7 @@
   <!-- 프로젝트 상세 페이지들 -->
   <section id="gns3" class="project-detail">
     <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-    <h2>GNS3</h2>
+    <h2>프로젝트 : GNS3</h2>
     <div class="main-project">
       <p>기본 GNS3 토폴로지</p>
       <img src="port_images/default_GNS3_Topol.PNG" onclick="openModal(this.src)">
@@ -176,10 +177,7 @@
 
   <section id="hids" class="project-detail">
     <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-    <h2>HIDS - OSSEC</h2>
-    <div class="main-project">
-      <img src="port_images/OSSEC(HIDS)_ipaddr.PNG" onclick="openModal(this.src)">
-    </div>
+    <h2>프로젝트 : HIDS - OSSEC</h2>
     <div class="detail-grid">
       <div class="detail-item">
         <p>윈도우, Rocky Agent로 연결</p>
@@ -194,7 +192,7 @@
 
   <section id="zabbix" class="project-detail">
      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 - Zabbix - 구축</h2>
+     <h2>프로젝트 : Zabbix - 구축</h2>
     <div class="main-project">
       <p>Rocky 로 Zabbix Server 구축</p>
       <img src="port_images/Rocky_Zabbix_server.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
@@ -209,7 +207,7 @@
 
   <section id="pfsense" class="project-detail">
      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 - pfsense remote Access</h2>
+     <h2>프로젝트 : pfsense remote Access</h2>
     <div class="main-project">
       <p>Pfsense로 오픈 VPN 구축</p>
       <img src="port_images/pfsense_remote_Access.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
@@ -218,7 +216,7 @@
 
   <section id="snort" class="project-detail">
      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 - Snort</h2>
+     <h2>프로젝트 : Snort</h2>
     <div class="main-project">
       <p>기본 Snort 구축한 우분투 rules</p>
       <img src="port_images/snort_rules_re_re.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
@@ -252,7 +250,7 @@
 
   <section id="suricata" class="project-detail">
      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 - Suricata</h2>
+     <h2>프로젝트 : Suricata</h2>
     <div class="main-project">
       <p>기본 Suricata 구축한 Rocky Rules </p>
       <img src="port_images/suricata_rules_re_re.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
