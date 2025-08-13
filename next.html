@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Next 페이지</title>
+  <style>
+    body { margin:0; font-family:sans-serif; background:#111; color:#fff; }
+    header { padding:10px; background:#222; }
+    header a {
+      background:#444; color:#fff; padding:8px 12px;
+      border-radius:6px; text-decoration:none; margin-right:10px;
+    }
+    .thumbnail-container { display:flex; flex-wrap:wrap; gap:15px; padding:20px; }
+    .thumbnail { cursor:pointer; width:200px; height:150px; overflow:hidden; border-radius:8px; }
+    .thumbnail img { width:100%; height:100%; object-fit:cover; }
+    .project-detail { display:none; padding:20px; }
+    .project-detail img { max-width:100%; border-radius:6px; cursor:pointer; }
+    .back-btn { background:#444; padding:8px 12px; border-radius:6px; cursor:pointer; margin-bottom:20px; display:inline-block; }
+    .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; }
+    .overlay img { max-width:90%; max-height:90%; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">INDEX 페이지로 이동</a>
+</header>
+
+<section id="project">
+  <div class="thumbnail-container">
+    <div class="thumbnail" data-project="p3"><img src="thumb3.jpg" alt=""></div>
+    <div class="thumbnail" data-project="p4"><img src="thumb4.jpg" alt=""></div>
+  </div>
+
+  <div class="project-detail" id="p3">
+    <span class="back-btn">← 뒤로가기</span>
+    <h2>프로젝트 3</h2>
+    <p>설명 텍스트...</p>
+    <img src="img5.jpg" alt="">
+    <img src="img6.jpg" alt="">
+  </div>
+
+  <div class="project-detail" id="p4">
+    <span class="back-btn">← 뒤로가기</span>
+    <h2>프로젝트 4</h2>
+    <p>설명 텍스트...</p>
+    <img src="img7.jpg" alt="">
+    <img src="img8.jpg" alt="">
+  </div>
+</section>
+
+<div class="overlay"><img src="" alt=""></div>
+
+<script>
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const projectDetails = document.querySelectorAll('.project-detail');
+  const overlay = document.querySelector('.overlay');
+  const overlayImg = overlay.querySelector('img');
+
+  thumbnails.forEach(th => {
+    th.addEventListener('click', () => {
+      document.querySelector('.thumbnail-container').style.display = 'none';
+      document.getElementById(th.dataset.project).style.display = 'block';
+    });
+  });
+
+  document.querySelectorAll('.back-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      projectDetails.forEach(d => d.style.display = 'none');
+      document.querySelector('.thumbnail-container').style.display = 'flex';
+    });
+  });
+
+  document.querySelectorAll('.project-detail img').forEach(img => {
+    img.addEventListener('click', () => {
+      overlayImg.src = img.src;
+      overlay.style.display = 'flex';
+    });
+  });
+
+  overlay.addEventListener('click', () => {
+    overlay.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
