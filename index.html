@@ -4,305 +4,481 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>포트폴리오 | 이혜원</title>
+
+  <!-- Google Font (인터페이스용, 선택사항) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin:0; background:#111; color:#fff; font-family:sans-serif; padding:20px;
-    }
-    header {
-      text-align:center; padding:20px 0; border-bottom:1px solid rgba(255,255,255,0.1);
-    }
-    header h1 {
-      margin:0; font-size:28px;
-    }
-    header p {
-      margin:8px 0 0; color:#aaa;
-    }
-    h2 {
-      margin-bottom:16px;
-    }
-    .projects-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;
-    }
-    .project-card {
-      background:#1a1a1a; padding:10px; border-radius:8px; text-align:center; cursor:pointer;
-    }
-    .project-card img {
-      width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:8px;
-    }
-    /* 상세보기 영역 */
-    .project-detail {
-      display:none;
-    }
-    .main-project {
-      background:#1a1a1a; padding:10px; border-radius:8px; text-align:center; margin-bottom:20px;
-    }
-    .main-project img {
-      width:100%;     
-      max-width:800px;
-      height:auto;    
-      object-fit:contain;
-      border-radius:8px;
-      cursor:pointer;
+    :root{
+      --bg:#1a1c1f;        /* 배경: 완전 블랙 대신 어두운 그레이 */
+      --card:#24262b;      /* 카드 배경: 살짝 밝은 그레이톤 */
+      --muted:#a0a6ac;     /* 텍스트 보조색 */
+      --accent:#7c5cff;    /* 포인트 색은 그대로 */
+      --glass: rgba(255,255,255,0.04);
+      --radius:12px;
+      --gap:16px;
+      --text:#f5f6f7;      /* 본문 글자: 약간 소프트한 화이트 */
     }
 
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body {
+      margin:0;
+      background: linear-gradient(180deg,#1a1c1f 0%, #2a2c30 70%);
+      color:var(--text);
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:24px;
+      line-height:1.5;
+      transition:background .25s ease;
+    }
+
+    /* Header */
+    header {
+      max-width:1200px;
+      margin:0 auto 20px;
+      padding:20px;
+      border-radius:14px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 6px 18px rgba(2,4,8,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .header-left{
+      display:flex; align-items:center; gap:16px;
+    }
+    .avatar {
+      width:56px; height:56px; border-radius:10px; background:linear-gradient(135deg,var(--accent),#4b79ff);
+      display:inline-flex; align-items:center; justify-content:center; font-weight:700; color:white; font-size:20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    header h1 {margin:0; font-size:20px; letter-spacing:0.2px;}
+    header p {margin:2px 0 0; color:var(--muted); font-size:13px;}
+
+    .header-actions {display:flex; gap:10px; align-items:center;}
+    .btn {
+      display:inline-block; padding:8px 14px; background:var(--glass); color:var(--text); border-radius:10px;
+      text-decoration:none; font-size:13px; border:1px solid rgba(255,255,255,0.03);
+      transition:transform .15s ease, background .15s ease;
+    }
+    .btn:hover{ transform:translateY(-3px); background:rgba(255,255,255,0.02) }
+
+    /* Intro */
+    .container{ max-width:1200px; margin:18px auto; }
+    #intro { background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:18px; border-radius:12px; margin-bottom:20px; }
+    #intro h2 { margin:0 0 6px; font-size:18px; }
+    #intro p { margin:0; color:#d6d9dc; font-size:14px; white-space:pre-line; }
+
+    /* Projects grid */
+    h2.section-title { margin:0 0 10px; font-size:18px; color:var(--text); }
+    .projects-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:var(--gap);
+    }
+    .project-card {
+      background:var(--card);
+      padding:12px;
+      border-radius:var(--radius);
+      text-align:center;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.025);
+      transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, background .18s ease;
+      user-select:none;
+      min-height:210px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .project-card:focus { outline:2px solid rgba(124,92,255,0.18); outline-offset:3px; }
+    .project-card:hover{ transform:translateY(-6px); box-shadow: 0 18px 40px rgba(2,4,8,0.6); }
+    .project-card img {
+      width:100%; height:140px; object-fit:cover; border-radius:10px; margin-bottom:10px; display:block;
+      background:linear-gradient(135deg, rgba(0,0,0,0.2), rgba(255,255,255,0.02));
+    }
+    .project-card p { margin:0; font-weight:600; color:#f2f3f5; font-size:14px; }
+
+    /* Main project (detail header) */
+    .main-project {
+      background:var(--card); padding:14px; border-radius:12px; text-align:center; margin-bottom:18px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .main-project img{
+      width:100%; max-width:900px; height:auto; object-fit:contain; border-radius:10px; cursor:pointer;
+      transition: transform .18s ease;
+    }
+    .main-project img:hover{ transform:scale(1.02) }
+
+    /* detail-grid */
     .detail-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;
+      display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:var(--gap);
     }
-    .detail-item {
-      background:#1a1a1a; padding:10px; border-radius:8px; text-align:center;
-    }
-    .detail-item img {
-      width:100%; height:150px; object-fit:cover; border-radius:8px; cursor:pointer;
-    }
-    /* 뒤로가기 버튼 */
-    .back-btn {
-      display:inline-block; margin-bottom:20px; padding:8px 16px; background:#333; color:#fff; border-radius:6px;
-      cursor:pointer; border:none; font-size:14px;
-    }
-    .back-btn:hover {
-      background:#555;
-    }
-    /* Modal styles */
+    .detail-item { background:var(--card); padding:12px; border-radius:12px; text-align:center; border:1px solid rgba(255,255,255,0.02); }
+    .detail-item img { width:100%; height:140px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform .12s ease;}
+    .detail-item img:hover{ transform:translateY(-6px) scale(1.02) }
+
+    /* project-detail section */
+    .project-detail { display:none; animation:fadeIn .22s ease both; }
+    @keyframes fadeIn { from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:none} }
+
+    /* Back button */
+    .back-btn { display:inline-flex; align-items:center; gap:8px; margin-bottom:18px; padding:8px 14px; background:#111316;
+      color:var(--text); border-radius:10px; cursor:pointer; border:1px solid rgba(255,255,255,0.03); }
+    .back-btn:hover { transform:translateY(-3px) }
+
+    /* Modal */
     .modal {
-      display:none; position:fixed; z-index:999; left:0; top:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.9); align-items:center; justify-content:center;
+      display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%;
+      background:rgba(3,4,5,0.85); align-items:center; justify-content:center; padding:24px;
     }
-    .modal img {
-      max-width:90%; max-height:90%;
+    .modal .modal-inner { position:relative; max-width:1200px; width:100%; }
+    .modal img { display:block; width:100%; height:auto; max-height:80vh; border-radius:10px; }
+    .modal .caption { margin-top:10px; color:var(--muted); font-size:13px; text-align:left; }
+    .modal .close {
+      position:absolute; right:-6px; top:-6px; background:rgba(0,0,0,0.5); border-radius:10px; padding:8px 10px; cursor:pointer;
+      border:1px solid rgba(255,255,255,0.05);
     }
+    .modal .close:hover { transform:translateY(-2px) }
+    /* Splash 화면 */
+    #splash {
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      background:#1a1c1f;   /* 다크 그레이 배경 */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:10000;
+      transition:opacity 1s ease, visibility 1s ease;
+    }
+    #splash.fade-out {
+      opacity:0;
+      visibility:hidden;
+    }
+    .splash-content h1 {
+      font-size:32px;
+      color:#7c5cff;       /* 포인트 컬러 */
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform:scale(0.9);}
+      to { opacity:1; transform:scale(1);}
+    }
+
+
+    /* small screens tweaks */
+    @media (max-width:640px){
+      header { flex-direction:column; align-items:flex-start; gap:12px; }
+      .avatar { width:48px; height:48px; font-size:18px }
+      .project-card { min-height:200px }
+      .main-project img { max-width:100% }
+    }
+
+    /* Accessibility: reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      * { transition:none !important; animation:none !important; }
+    }
+
   </style>
 </head>
 <body>
+  <!-- body 제일 위쪽에 추가 -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1>SECURITY</h1>
+    </div>
+  </div>
+
   <header>
-    <h1>이혜원</h1>
-    <p>보안 관련 포트폴리오 페이지입니다.</p>
-    <!-- header 내부, 뒤로가기 버튼과 상관없이 넣으면 됨 -->
-    <a href="next.html" style="display:inline-block; margin-top:10px; padding:8px 16px; background:#333; color:#fff; border-radius:6px; text-decoration:none;">다음 페이지로 이동 →</a>
+    <div class="header-left">
+      <div class="avatar" aria-hidden="true">LH</div>
+      <div>
+        <h1>이혜원</h1>
+        <p>보안 관련 포트폴리오 — 네트워크 · 서버 · 탐지 시스템</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a class="btn" href="next.html" title="다음 페이지로 이동">다음 페이지 →</a>
+      <button class="btn" onclick="window.scrollTo({top:document.body.offsetTop, behavior:'smooth'})" title="맨 위로">Top</button>
+    </div>
   </header>
-  <!-- header 아래에 추가 -->
-  <!-- 소개 섹션 -->
-  <section id="intro" style="margin:20px 0; max-width:800px;">
-    <h2 style="text-align:left; margin-bottom:10px;">소개</h2>
-    <p style="text-align:left; line-height:1.6; color:#ccc;">
-      안녕하세요, 저는 이혜원입니다.  
-      이 페이지는 저의 포트폴리오로, 다양한 네트워크, 보안, 서버 구축 프로젝트를 확인하실 수 있습니다.  
-      각 프로젝트 카드를 클릭하면 상세 내용과 이미지를 볼 수 있습니다.
-      GNS3, HIDS/NIDS, Zabbix, Pfsense, Snort/Suricata
-    </p>
-  </section>
 
+  <main class="container" role="main">
+    <!-- 소개 섹션 -->
+    <section id="intro" aria-labelledby="intro-title">
+      <h2 id="intro-title">소개</h2>
+      <p>
+안녕하세요, 저는 이혜원입니다.
+이 페이지는 저의 포트폴리오로, 다양한 네트워크, 보안, 서버 구축 프로젝트를 확인하실 수 있습니다.
+각 프로젝트 카드를 클릭하면 상세 내용과 이미지를 볼 수 있습니다.
+GNS3, HIDS/NIDS, Zabbix, Pfsense, Snort/Suricata
+      </p>
+    </section>
 
+    <!-- 프로젝트 목록 -->
+    <section id="project-list" aria-labelledby="projects-title">
+      <h2 class="section-title" id="projects-title">프로젝트 목록</h2>
+      <hr style="border:none; height:1px; background:rgba(255,255,255,0.03); margin:12px 0 18px;">
+      <div class="projects-grid" role="list">
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('gns3')" onkeypress="if(event.key==='Enter') showProject('gns3')">
+          <img src="port_images/default_GNS3_Topol.PNG" alt="GNS3 썸네일" loading="lazy">
+          <p>GNS3</p>
+        </div>
 
-  <!-- 프로젝트 목록 -->
-  <section id="project-list">
-    <h2>프로젝트 목록</h2>
-    <hr>
-    <div class="projects-grid">
-      <div class="project-card" onclick="showProject('gns3')">
-        <img src="port_images/default_GNS3_Topol.PNG" alt="GNS3 썸네일">
-        <p>GNS3</p>
-      </div>
-      <div class="project-card" onclick="showProject('hids')">
-        <img src="port_images/OSSEC(HIDS)_ipaddr.PNG" alt="HIDS 썸네일">
-        <p>HIDS - OSSEC</p>
-      </div>
-      <div class="project-card" onclick="showProject('zabbix')">
-        <img src="port_images/Rocky_Zabbix_server.PNG" alt="Zabbix 썸네일">
-        <p>Zabbix</p>
-      </div>
-      <div class="project-card" onclick="showProject('pfsense')">
-        <img src="port_images/pfsense_remote_Access.PNG" alt="pfsense 썸네일">
-        <p>pfsense Remote Access</p>
-      </div>
-      <div class="project-card" onclick="showProject('snort')">
-        <img src="port_images/snort_rules_re_re.PNG" alt="Snort 썸네일">
-        <p>Snort</p>
-      </div>
-      <div class="project-card" onclick="showProject('suricata')">
-        <img src="port_images/suricata_rules_re_re.PNG" alt="Suricata 썸네일">
-        <p>Suricata</p>
-      </div>
-    </div>
-  </section>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('hids')" onkeypress="if(event.key==='Enter') showProject('hids')">
+          <img src="port_images/OSSEC(HIDS)_ipaddr.PNG" alt="HIDS 썸네일" loading="lazy">
+          <p>HIDS - OSSEC</p>
+        </div>
 
-  <!-- 프로젝트 상세 페이지들 -->
-  <section id="gns3" class="project-detail">
-    <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-    <h2>프로젝트 : GNS3</h2>
-    <div class="main-project">
-      <p>기본 GNS3 토폴로지</p>
-      <img src="port_images/default_GNS3_Topol.PNG" onclick="openModal(this.src)">
-    </div>    
-    <div class="detail-grid">
-      <div class="detail-item">
-        <p>ASAv 정책 모음</p>
-        <img src="port_images/ASAv_rules.PNG" onclick="openModal(this.src)">
-      </div>
-      <div class="detail-item">
-        <p>FireFox3 -> ASAv inside http 접속</p>
-        <p>host 192.168.192.2 에서 host 192.168.192.254 로 보내는 tcp http 허용</p>
-        <img src="port_images/FireFox3_to_inside_http.PNG" onclick="openModal(this.src)">
-      </div>
-      <div class="detail-item">
-        <p>FireFox3 -> ASAv inside telnet 접속</p>
-        <p>telnet 은 ASAv에 따로 telnet (IP) (Zone) 명령어로 허용함.</p>
-        <img src="port_images/FireFox3_to_inside_telnet.PNG" onclick="openModal(this.src)">
-      </div>
-      <div class="detail-item">
-        <p>Webterm2 -> ASAv dmz telnet 접속</p>
-        <p>동일하게 ASAv에 따로 명령어로 허용.</p>
-        <img src="port_images/webterm2_to_dmz_telnet.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-      </div>
-       <div class="detail-item">
-        <p>PC1 -> Webterm1 Ping 접속</p>
-        <p>host 192.168.192.3 -> 192.168.64.2 로 보내는 echo, echo-reply 허용</p>
-        <img src="port_images/PC1_to_webterm1_ping.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>Webterm1 -> R1 http 접속</p>
-        <p>192.168.64.2 -> 192.168.224.3 로 보내는 http(www) 허용</p>
-        <img src="port_images/webterm1_to_R1_http.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>Webterm1 -> R1 telnet 접속</p>
-        <p>192.168.64.2 -> 192.168.224.3 로 보내는 telnet 허용</p>
-        <img src="port_images/Webterm1_to_R1_telnet.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>Webterm2 -> PC1 Ping 가능</p>
-        <p>192.168.192.3 -> 192.168.16.1 로 보내는 echo, 응답받는 echo-reply 허용</p>
-        <img src="port_images/Webterm2_to_PC1_ping.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>HSRP 구축</p>
-        <p>R3 - Standby, R4 - Active 장치 만듦</p>
-        <img src="port_images/R3_Standby.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-        <img src="port_images/R4_Active.PNG" alt="프로젝트 이미지 3" onclick="openModal(this.src)" />
-      </div>
-    </div>
-  </section>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('zabbix')" onkeypress="if(event.key==='Enter') showProject('zabbix')">
+          <img src="port_images/Rocky_Zabbix_server.PNG" alt="Zabbix 썸네일" loading="lazy">
+          <p>Zabbix</p>
+        </div>
 
-  <section id="hids" class="project-detail">
-    <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-    <h2>프로젝트 : HIDS - OSSEC</h2>
-    <div class="detail-grid">
-      <div class="detail-item">
-        <p>윈도우, Rocky Agent로 연결</p>
-        <img src="port_images/ossec_server_ubuntu_linkagent.PNG" onclick="openModal(this.src)">
-      </div>
-      <div class="detail-item">
-        <p>윈도우 OSSEC 연결</p>
-        <img src="port_images/Window10-Ossec.PNG" onclick="openModal(this.src)">
-      </div>
-    </div>
-  </section>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('pfsense')" onkeypress="if(event.key==='Enter') showProject('pfsense')">
+          <img src="port_images/pfsense_remote_Access.PNG" alt="pfsense 썸네일" loading="lazy">
+          <p>pfsense Remote Access</p>
+        </div>
 
-  <section id="zabbix" class="project-detail">
-     <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 : Zabbix - 구축</h2>
-    <div class="main-project">
-      <p>Rocky 로 Zabbix Server 구축</p>
-      <img src="port_images/Rocky_Zabbix_server.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
-    </div>
-    <div class="detail-grid">
-      <div class="detail-item">
-        <p>윈도우, Rocky Agent로 연결</p>
-        <img src="port_images/zabbix_link.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-      </div>
-    </div>
-  </section>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('snort')" onkeypress="if(event.key==='Enter') showProject('snort')">
+          <img src="port_images/snort_rules_re_re.PNG" alt="Snort 썸네일" loading="lazy">
+          <p>Snort</p>
+        </div>
 
-  <section id="pfsense" class="project-detail">
-     <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 : pfsense remote Access</h2>
-    <div class="main-project">
-      <p>Pfsense로 오픈 VPN 구축</p>
-      <img src="port_images/pfsense_remote_Access.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
-    </div>
-  </section>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('suricata')" onkeypress="if(event.key==='Enter') showProject('suricata')">
+          <img src="port_images/suricata_rules_re_re.PNG" alt="Suricata 썸네일" loading="lazy">
+          <p>Suricata</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="snort" class="project-detail">
-     <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 : Snort</h2>
-    <div class="main-project">
-      <p>기본 Snort 구축한 우분투 rules</p>
-      <img src="port_images/snort_rules_re_re.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
-    </div>
-    <div class="detail-grid">
-      <div class="detail-item">
-        <p>Snort Rule 1. Window -> OSSEC http, ping탐지</p>
-        <img src="port_images/snortRule_1.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-        <img src="port_images/Snort_Windo1_to_OSSEC_ping.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-        <img src="port_images/SnortRule_1-2.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
+    <!-- 상세 섹션들 (ID는 기존과 동일) -->
+    <section id="gns3" class="project-detail" aria-hidden="true">
+      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
+      <h2>프로젝트 : GNS3</h2>
+      <div class="main-project">
+        <p>기본 GNS3 토폴로지</p>
+        <img src="port_images/default_GNS3_Topol.PNG" alt="기본 GNS3 토폴" onclick="openModal(this.src)">
       </div>
-      <div class="detail-item">
-        <p>Snort Rule 2. Rocky -> Window ping 탐지</p>
-        <img src="port_images/snortRule_2.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
+      <div class="detail-grid">
+        <div class="detail-item">
+          <p>ASAv 정책 모음</p>
+          <img src="port_images/ASAv_rules.PNG" alt="ASAv 정책" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>FireFox3 -> ASAv inside http 접속</p>
+          <p style="color:var(--muted); font-size:13px;">host 192.168.192.2 → 192.168.192.254 (tcp http 허용)</p>
+          <img src="port_images/FireFox3_to_inside_http.PNG" alt="http 접속" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>FireFox3 -> ASAv inside telnet 접속</p>
+          <p style="color:var(--muted); font-size:13px;">telnet은 ASAv에 따로 명령어로 허용</p>
+          <img src="port_images/FireFox3_to_inside_telnet.PNG" alt="telnet 접속" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Webterm2 -> ASAv dmz telnet 접속</p>
+          <img src="port_images/webterm2_to_dmz_telnet.PNG" alt="Webterm2 to dmz telnet" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>PC1 -> Webterm1 Ping 접속</p>
+          <img src="port_images/PC1_to_webterm1_ping.PNG" alt="PC1 ping Webterm1" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Webterm1 -> R1 http 접속</p>
+          <img src="port_images/webterm1_to_R1_http.PNG" alt="Webterm1 to R1 http" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Webterm1 -> R1 telnet 접속</p>
+          <img src="port_images/Webterm1_to_R1_telnet.PNG" alt="Webterm1 to R1 telnet" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Webterm2 -> PC1 Ping 가능</p>
+          <img src="port_images/Webterm2_to_PC1_ping.PNG" alt="Webterm2 ping PC1" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>HSRP 구축</p>
+          <img src="port_images/R3_Standby.PNG" alt="R3 Standby" onclick="openModal(this.src)">
+          <img src="port_images/R4_Active.PNG" alt="R4 Active" onclick="openModal(this.src)" style="margin-top:8px;">
+        </div>
       </div>
-      <div class="detail-item">
-        <p>Snort Rule 3. Kali -> Window Rand Source Attack DDoS 탐지</p>
-        <img src="port_images/SnortRule_4.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>Snort Rule 4. Kali -> Rocky SYN Flag Scanning 탐지</p>
-        <img src="port_images/SnortRule_5_Kali.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-        <img src="port_images/SnortRules_5_ubuntu.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>Snort Rule 5. Window -> Rocky Command URL 탐지</p>
-        <img src="port_images/snort_rule4.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="suricata" class="project-detail">
-     <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
-     <h2>프로젝트 : Suricata</h2>
-    <div class="main-project">
-      <p>기본 Suricata 구축한 Rocky Rules </p>
-      <img src="port_images/suricata_rules_re_re.PNG" alt="기본 이미지" onclick="openModal(this.src)" />
-    </div>
-    <div class="detail-grid">
-      <div class="detail-item">
-        <p>Suricata Rules 1. Window -> OSSEC ubuntu http, ping 탐지</p>
-        <img src="port_images/suricataRule_1.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-        <img src="port_images/suricataRule_1-2.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
+    <section id="hids" class="project-detail" aria-hidden="true">
+      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
+      <h2>프로젝트 : HIDS - OSSEC</h2>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <p>윈도우, Rocky Agent로 연결</p>
+          <img src="port_images/ossec_server_ubuntu_linkagent.PNG" alt="ossec agent 연결" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>윈도우 OSSEC 연결</p>
+          <img src="port_images/Window10-Ossec.PNG" alt="Window10 Ossec" onclick="openModal(this.src)">
+        </div>
       </div>
-      <div class="detail-item">
-        <p>Suricata Rules 2. Kali -> Rocky SYN Flag Scanning 탐지</p>
-        <img src="port_images/SuricataRules_5.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-      </div>
-      <div class="detail-item">
-        <p>Suricata Rules 3. Window -> Rocky Command 탐지</p>
-        <img src="port_images/suricata_rule4.PNG" alt="프로젝트 이미지 1" onclick="openModal(this.src)" />
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 다른 프로젝트들도 동일 구조로 추가... -->
+    <section id="zabbix" class="project-detail" aria-hidden="true">
+      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
+      <h2>프로젝트 : Zabbix - 구축</h2>
+      <div class="main-project">
+        <p>Rocky 로 Zabbix Server 구축</p>
+        <img src="port_images/Rocky_Zabbix_server.PNG" alt="Zabbix Server" onclick="openModal(this.src)">
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <p>윈도우, Rocky Agent로 연결</p>
+          <img src="port_images/zabbix_link.PNG" alt="zabbix link" onclick="openModal(this.src)">
+        </div>
+      </div>
+    </section>
+
+    <section id="pfsense" class="project-detail" aria-hidden="true">
+      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
+      <h2>프로젝트 : pfsense remote Access</h2>
+      <div class="main-project">
+        <p>Pfsense로 오픈 VPN 구축</p>
+        <img src="port_images/pfsense_remote_Access.PNG" alt="pfsense remote access" onclick="openModal(this.src)">
+      </div>
+    </section>
+
+    <section id="snort" class="project-detail" aria-hidden="true">
+      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
+      <h2>프로젝트 : Snort</h2>
+      <div class="main-project">
+        <p>기본 Snort 구축한 우분투 rules</p>
+        <img src="port_images/snort_rules_re_re.PNG" alt="snort rules" onclick="openModal(this.src)">
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <p>Snort Rule 1. Window -> OSSEC http, ping탐지</p>
+          <img src="port_images/snortRule_1.PNG" alt="snort rule 1" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Snort Rule 2. Rocky -> Window ping 탐지</p>
+          <img src="port_images/snortRule_2.PNG" alt="snort rule 2" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Snort Rule 3. Kali -> Window DDoS 탐지</p>
+          <img src="port_images/SnortRule_4.PNG" alt="snort rule 3" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Snort Rule 4. Kali -> Rocky SYN Scanning</p>
+          <img src="port_images/SnortRule_5_Kali.PNG" alt="snort rule 4" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Snort Rule 5. Window -> Rocky Command URL 탐지</p>
+          <img src="port_images/snort_rule4.PNG" alt="snort rule 5" onclick="openModal(this.src)">
+        </div>
+      </div>
+    </section>
+
+    <section id="suricata" class="project-detail" aria-hidden="true">
+      <button class="back-btn" onclick="backToList()">← 뒤로가기</button>
+      <h2>프로젝트 : Suricata</h2>
+      <div class="main-project">
+        <p>기본 Suricata 구축한 Rocky Rules</p>
+        <img src="port_images/suricata_rules_re_re.PNG" alt="suricata rules" onclick="openModal(this.src)">
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <p>Suricata Rules 1. Window -> OSSEC http, ping 탐지</p>
+          <img src="port_images/suricataRule_1.PNG" alt="suricata rule 1" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Suricata Rules 2. Kali -> Rocky SYN Flag Scanning 탐지</p>
+          <img src="port_images/SuricataRules_5.PNG" alt="suricata rule 2" onclick="openModal(this.src)">
+        </div>
+        <div class="detail-item">
+          <p>Suricata Rules 3. Window -> Rocky Command 탐지</p>
+          <img src="port_images/suricata_rule4.PNG" alt="suricata rule 3" onclick="openModal(this.src)">
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- 이미지 확대 모달 -->
-  <div id="imageModal" class="modal" onclick="closeModal()">
-    <img id="modalImage" src="" alt="확대 이미지" />
+  <div id="imageModal" class="modal" role="dialog" aria-hidden="true" aria-modal="true" onclick="closeModal(event)">
+    <div class="modal-inner" onclick="event.stopPropagation()">
+      <button class="close" aria-label="닫기" onclick="closeModal()">✕</button>
+      <img id="modalImage" src="" alt="확대 이미지" />
+      <div class="caption" id="modalCaption"></div>
+    </div>
   </div>
 
   <script>
+    // body 맨 아래 script 안에 추가
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("splash").classList.add("fade-out");
+      }, 2000); // 2초 후 페이드아웃
+    });
+
+    // 기존 함수명/동작은 그대로 유지했습니다.
     function showProject(id) {
       document.getElementById('project-list').style.display = 'none';
-      document.querySelectorAll('.project-detail').forEach(sec => sec.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
+      document.querySelectorAll('.project-detail').forEach(sec => {
+        sec.style.display = 'none';
+        sec.setAttribute('aria-hidden','true');
+      });
+      const el = document.getElementById(id);
+      if(el){
+        el.style.display = 'block';
+        el.setAttribute('aria-hidden','false');
+        // 스크롤 상단으로 이동
+        window.scrollTo({top: document.querySelector('main').offsetTop, behavior: 'smooth'});
+      }
     }
+
     function backToList() {
       document.getElementById('project-list').style.display = 'block';
-      document.querySelectorAll('.project-detail').forEach(sec => sec.style.display = 'none');
+      document.querySelectorAll('.project-detail').forEach(sec => {
+        sec.style.display = 'none';
+        sec.setAttribute('aria-hidden','true');
+      });
+      // 포커스 관리: 프로젝트 목록의 첫 카드로 포커스 이동
+      const firstCard = document.querySelector('.projects-grid .project-card');
+      if(firstCard){ firstCard.focus(); }
+      window.scrollTo({top: document.querySelector('main').offsetTop, behavior: 'smooth'});
     }
+
     function openModal(src) {
-      document.getElementById('modalImage').src = src;
-      document.getElementById('imageModal').style.display = 'flex';
+      const img = document.getElementById('modalImage');
+      img.src = src;
+      // 캡션: 파일명에서 간단히 추출 (원하면 더 복잡하게 변경 가능)
+      const cap = src.split('/').pop().replace(/[-_]/g,' ').split('.')[0];
+      document.getElementById('modalCaption').textContent = cap;
+      const m = document.getElementById('imageModal');
+      m.style.display = 'flex';
+      m.setAttribute('aria-hidden','false');
+      // ESC 로 닫기 위해 포커스 설정
+      document.querySelector('.modal .close').focus();
     }
-    function closeModal() {
-      document.getElementById('imageModal').style.display = 'none';
+
+    function closeModal(e) {
+      // 클릭 이벤트에서 전달될 경우(overlay 클릭)와 close 버튼 클릭 둘다 처리
+      const m = document.getElementById('imageModal');
+      m.style.display = 'none';
+      m.setAttribute('aria-hidden','true');
+      document.getElementById('modalImage').src = '';
+      // 포커스 복원: 마지막으로 열린 이미지가 속한 카드로 포커스 주지 않음(간단 복원)
     }
+
+    // 키보드: ESC 닫기
+    document.addEventListener('keydown', function(ev){
+      if(ev.key === 'Escape'){
+        const modal = document.getElementById('imageModal');
+        if(modal.style.display === 'flex') closeModal();
+      }
+    });
+
+    // 이미지 클릭시 stopPropagation already set in markup for inner click
+
+    // 향후: 필요하면 여기서 lazy load fallback, 라이트박스 효과 등 추가 가능
   </script>
 </body>
 </html>
