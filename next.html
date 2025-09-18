@@ -73,6 +73,13 @@
 
     .project-detail { display:none; background:var(--card); padding:18px; border-radius:12px; border:2px solid var(--accent-light); margin-bottom:20px; }
     .project-detail img { width:100%; max-width:900px; border-radius:10px; margin-top:10px; cursor:pointer; }
+    
+    .detail-grid {
+      display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:var(--gap);
+    }
+    .detail-item { background:var(--card); padding:12px; border-radius:12px; text-align:center; border:1px solid rgba(255,255,255,0.02); }
+    .detail-item img { width:100%; height:140px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform .12s ease;}
+    .detail-item img:hover{ transform:translateY(-6px) scale(1.02) }
 
     .back-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; background:var(--card); color:var(--text);
       border-radius:10px; cursor:pointer; border:2px solid var(--accent-light); margin-bottom:18px;
@@ -125,7 +132,7 @@
           <p>CTF 풀이과정-Venus</p>
         </div>
         <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
-          <img src="port_images/images-part/images-part/DNS,LOG,ANAlyzer,DB/domain-http.png" alt="프로젝트 2 썸네일">
+          <img src="port_images/images-part/DNS,LOG,ANAlyzer,DB/domain-http.png" alt="프로젝트 2 썸네일">
           <p>Domain Name Server 구축</p>
         </div>
         <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
@@ -164,8 +171,26 @@
             <img src="port_images/images-part/ctf/gobuster.png" alt="3" onclick="openModal(this.src)">
           </div>
           <div class="detail-item">
-            <p>해당 로그인 페이지로 패스워드 찾기</p>
-            <img src="port_images/images-part/ctf/gobuster.png" alt="3" onclick="openModal(this.src)">
+            <p>해당 로그인 페이지로 패스워드 찾기(burpsuite)</p>
+            <img src="port_images/images-part/ctf/cookie.png" alt="3" onclick="openModal(this.src)">
+            <p>base64 로 디코딩</p>
+            <img src="port_images/images-part/ctf/decoding.png" alt="3" onclick="openModal(this.src)">
+            <p>다시 뒷부분 ROT13 으로 해석하면 guest..</p>
+            <p>base64(username:ROT13(password)) 상태</p>
+            <p>Fuzz 로 username 찾아보기</p>
+            <img src="port_images/images-part/ctf/fuzz-username.png" alt="3" onclick="openModal(this.src)">
+            <p>발견한 Username</p>
+            <img src="port_images/images-part/ctf/username.png" alt="3" onclick="openModal(this.src)">
+            <p>Burpsuite 에서 username 만 Base64 암호화해서 넣어도 비밀번호가 뜸</p>
+            <img src="port_images/images-part/ctf/password-burpsuite.png" alt="3" onclick="openModal(this.src)">
+            <p>이걸로 알아낸 magellan 의 비밀번호</p>
+            <img src="port_images/images-part/ctf/magel-passwd.png" alt="3" onclick="openModal(this.src)">
+            <p>SSH 접속 후 Userflag Get</p>
+            <img src="port_images/images-part/ctf/userflag.png" alt="3" onclick="openModal(this.src)">
+            <p>linpeas.sh 를 돌려서 취약한 CVE 공격머신으로 공격</p>
+            <img src="port_images/images-part/CVE.png" alt="3" onclick="openModal(this.src)">
+            <p>Root Flag Get</p>
+            <img src="port_images/images-part/ctf/rootflag.png" alt="3" onclick="openModal(this.src)">
           </div>
         </div>
 
