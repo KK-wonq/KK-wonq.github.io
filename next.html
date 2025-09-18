@@ -3,103 +3,264 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>다음 뭐뭐 페이지</title>
+  <title>다음 페이지 | 이혜원</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin:0; background:#111; color:#fff; font-family:sans-serif; padding:20px;
+    :root {
+      --bg: #1a1c1f;
+      --bg-mid: #1f1f23;
+      --bg-end: #24262b;
+      --card: #24262b;
+      --muted: #a0a6ac;
+      --accent: rgba(138, 117, 255, 0.7);
+      --accent-light: rgba(138, 117, 255, 0.3);
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --gap: 16px;
+      --text: #f5f6f7;
+      --header-height: 120px;
     }
+
+    *{box-sizing:border-box}
+    body, html {
+      margin:0; padding:0; height:100%; min-height:100%;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      background: linear-gradient(180deg, #1a1c1f 0%, #1f1f23 50%, #24262b 100%);
+      background-size: cover;
+      color: var(--text); line-height:1.5;
+    }
+
+    main.container { padding:24px; min-height: calc(100vh - var(--header-height)); max-width:1200px; margin:0 auto; }
+
     header {
-      text-align:center; padding:20px 0; border-bottom:1px solid rgba(255,255,255,0.1);
+      max-width:1200px; margin:0 auto 20px; padding:20px;
+      border-radius:14px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 6px 18px rgba(2,4,8,0.6);
+      display:flex; align-items:center; justify-content:space-between;
     }
-    header a {
-      background:#444; color:#fff; padding:8px 12px;
-      border-radius:6px; text-decoration:none; margin-right:10px;
+    .header-left{ display:flex; align-items:center; gap:16px; }
+    .avatar {
+      width:56px; height:56px; border-radius:10px; background:linear-gradient(135deg,var(--accent),#4b79ff);
+      display:inline-flex; align-items:center; justify-content:center; font-weight:700; color:white; font-size:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.6);
     }
-    header h1 {
-      margin:0; font-size:28px;
+    header h1 { margin:0; font-size:20px; }
+    header p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+    .header-actions { display:flex; gap:10px; align-items:center; }
+
+    .btn {
+      display:inline-block; padding:8px 14px; background:var(--glass); color:var(--text);
+      border-radius:10px; text-decoration:none; font-size:13px; border:1px solid rgba(255,255,255,0.03);
+      transition: transform .15s ease, background .15s ease;
     }
-    header p {
-      margin:8px 0 0; color:#aaa;
+    .btn:hover{ transform:translateY(-3px); background:rgba(255,255,255,0.02) }
+
+    h2.section-title { margin:0 0 10px; font-size:18px; color:var(--text); }
+    .projects-grid {
+      display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:var(--gap);
     }
-    h2 {
-      margin-bottom:16px;
+    .project-card {
+      background:var(--card); padding:12px; border-radius:var(--radius); text-align:center; cursor:pointer;
+      border:2px solid var(--accent-light); transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease;
+      display:flex; flex-direction:column; justify-content:space-between; min-height:210px;
     }
-    .thumbnail-container { display:flex; flex-wrap:wrap; gap:15px; padding:20px; }
-    .thumbnail { cursor:pointer; width:200px; height:150px; overflow:hidden; border-radius:8px; }
-    .thumbnail img { width:100%; height:100%; object-fit:cover; }
-    .project-detail { display:none; padding:20px; }
-    .project-detail img { max-width:100%; border-radius:6px; cursor:pointer; }
-    .back-btn { background:#444; padding:8px 12px; border-radius:6px; cursor:pointer; margin-bottom:20px; display:inline-block; }
-    .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; }
-    .overlay img { max-width:90%; max-height:90%; }
+    .project-card:hover { transform:translateY(-2px); box-shadow:0 0 12px var(--accent-light); }
+    .project-card img { width:100%; height:140px; object-fit:cover; border-radius:10px; margin-bottom:10px; }
+    .project-card p { margin:0; font-weight:600; color:#f2f3f5; font-size:14px; }
+
+    .project-detail { display:none; background:var(--card); padding:18px; border-radius:12px; border:2px solid var(--accent-light); margin-bottom:20px; }
+    .project-detail img { width:100%; max-width:900px; border-radius:10px; margin-top:10px; cursor:pointer; }
+
+    .back-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; background:var(--card); color:var(--text);
+      border-radius:10px; cursor:pointer; border:2px solid var(--accent-light); margin-bottom:18px;
+      transition: transform .15s ease, background .15s ease; }
+    .back-btn:hover { background: rgba(138,117,255,0.08); border-color: var(--accent); }
+
+    /* Modal */
+    .modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%;
+      background:rgba(3,4,5,0.85); align-items:center; justify-content:center; padding:24px; }
+    .modal .modal-inner { position:relative; max-width:1200px; width:100%; }
+    .modal img { display:block; width:100%; height:auto; max-height:80vh; border-radius:10px; }
+    .modal .close { position:absolute; right:-6px; top:-6px; background:rgba(0,0,0,0.5); border-radius:10px; padding:8px 10px; cursor:pointer;
+      border:1px solid rgba(255,255,255,0.05); }
+    .modal .close:hover { transform:translateY(-2px); }
+    .modal .caption { margin-top:10px; color:var(--muted); font-size:13px; text-align:left; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>이혜원</h1>
-  <p>포트폴리오 ~~페이지입니다.</p>
-  <a href="index.html" style="display:inline-block; margin-top:10px; padding:8px 16px; background:#333; color:#fff; border-radius:6px; text-decoration:none;">← 이전 페이지로 돌아가기</a>
-</header>
+  <header>
+    <div class="header-left">
+      <div class="avatar" aria-hidden="true">LH</div>
+      <div>
+        <h1>이혜원</h1>
+        <p>보안 로그, 취약점 분석 관련 포트폴리오</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a class="btn" href="index.html" title="이전 페이지로 돌아가기">← 이전 페이지</a>
+      <button class="btn" onclick="window.scrollTo({top:document.body.offsetTop, behavior:'smooth'})" title="맨 위로">Top</button>
+    </div>
+  </header>
 
-<section id="project">
-  <h2>프로젝트 목록</h2>
-  <hr>
-  <div class="thumbnail-container">
-    <div class="thumbnail" data-project="p3"><img src="port_images/test.jpg" alt=""></div>
-    <div class="thumbnail" data-project="p4"><img src="port_images/test2.jpg" alt=""></div>
+  <main class="container" role="main">
+    <!-- 소개 섹션 -->
+    <section id="intro" aria-labelledby="intro-title" style="background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:18px; border-radius:12px; margin-bottom:20px;">
+      <h2 id="intro-title" style="margin:0 0 6px; font-size:18px;">소개</h2>
+      <p style="margin:0; color:#d6d9dc; font-size:14px; white-space:pre-line;">
+    이 페이지는 보안로그, ctf 등의 프로젝트를 확인하실 수 있습니다.
+      </p>
+    </section>
+
+    <!--처음에 보이는 프로젝트 섹션-->
+    <section id="project-list" aria-labelledby="projects-title">
+      <h2 class="section-title" id="projects-title">프로젝트 목록</h2>
+      <hr style="border:none; height:1px; background:rgba(255,255,255,0.03); margin:12px 0 18px;">
+      <div class="projects-grid" role="list">
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p3')">
+          <img src="port_images/images-part/ctf/venus.jpg" alt="프로젝트 1 썸네일">
+          <p>CTF 풀이과정-Venus</p>
+        </div>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
+          <img src="port_images/images-part/images-part/DNS,LOG,ANAlyzer,DB/domain-http.png" alt="프로젝트 2 썸네일">
+          <p>Domain Name Server 구축</p>
+        </div>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
+          <img src="port_images/images-part/Samba,nfs/sambaserver.png" alt="프로젝트 3 썸네일">
+          <p>자원 공유 서버 구축</p>
+        </div>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
+          <img src="port_images/images-part/PMM.png" alt="프로젝트 4 썸네일">
+          <p>PMM 구축</p>
+        </div>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
+          <img src="port_images/images-part/Linux/default_image.png" alt="프로젝트 5 썸네일">
+          <p>서버 보안 관련 점검</p>
+        </div>
+        <div class="project-card" role="listitem" tabindex="0" onclick="showProject('p4')">
+          <img src="port_images/images-part/wazuh.PNG" alt="프로젝트 6 썸네일">
+          <p>Wazuh 구축 구축</p>
+        </div>
+      </div>
+
+      <!--프로젝트 들어가면 나오는 섹션-->
+       <!--CTF-->
+      <div class="project-detail" id="p3">
+        <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <p>머신의 IP 를 먼저 알아냄.</p>
+            <img src="port_images/images-part/ctf/ctf-1(ip).png" alt="1" onclick="openModal(this.src)">
+          </div>
+          <div class="detail-item">
+            <p>Nmap 으로 Port 스캐닝</p>
+            <img src="port_images/images-part/ctf/ctf-nmap.png" alt="2" onclick="openModal(this.src)">
+          </div>
+          <div class="detail-item">
+            <p>Gobuster 로 추가 디렉터리 찾기</p>
+            <img src="port_images/images-part/ctf/gobuster.png" alt="3" onclick="openModal(this.src)">
+          </div>
+          <div class="detail-item">
+            <p>해당 로그인 페이지로 패스워드 찾기</p>
+            <img src="port_images/images-part/ctf/gobuster.png" alt="3" onclick="openModal(this.src)">
+          </div>
+        </div>
+
+      </div>
+      <!--CTF여기까지-->
+      
+      <!--DNS-->
+      <div class="project-detail" id="p4">
+        <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+        <h2>프로젝트 2</h2>
+        <p>허거덩</p>
+        <img src="port_images/test2.jpg" alt="">
+        <img src="img8.jpg" alt="">
+      </div>
+      <!--DNS여기까지-->
+      
+      <!--자원 공유 서버 구축-->
+      <div class="project-detail" id="p4">
+        <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+        <h2>프로젝트 2</h2>
+        <p>허거덩</p>
+        <img src="port_images/test2.jpg" alt="">
+        <img src="img8.jpg" alt="">
+      </div>
+      <!--자원공유 서버여기까지-->
+      
+      <!--PMM-->
+      <div class="project-detail" id="p4">
+        <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+        <h2>프로젝트 2</h2>
+        <p>허거덩</p>
+        <img src="port_images/test2.jpg" alt="">
+        <img src="img8.jpg" alt="">
+      </div>
+      <!--PMM여기까지-->
+       
+      <!--서버보안관련-->
+      <div class="project-detail" id="p4">
+        <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+        <h2>프로젝트 2</h2>
+        <p>허거덩</p>
+        <img src="port_images/test2.jpg" alt="">
+        <img src="img8.jpg" alt="">
+      </div>
+      <!--서버보안리눅스 여기까지-->
+      
+      <!--Wazuh-->
+      <div class="project-detail" id="p4">
+        <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+        <h2>프로젝트 2</h2>
+        <p>허거덩</p>
+        <img src="port_images/test2.jpg" alt="">
+        <img src="img8.jpg" alt="">
+      </div>
+      <!--Wazuh-->
+      
+      
+    </section>
+  </main>
+
+  <div class="modal" onclick="hideModal()">
+    <div class="modal-inner">
+      <span class="close" onclick="hideModal()">×</span>
+      <img src="" alt="" id="modal-img">
+      <div class="caption" id="modal-caption"></div>
+    </div>
   </div>
 
-  <div class="project-detail" id="p3">
-    <span class="back-btn">← 뒤로가기</span>
-    <h2>프로젝트 3</h2>
-    <p>오늘 나는 아침 6시에</p>
-    <img src="port_images/test.jpg" alt="개밥줘소밥줘">
-    <img src="img6.jpg" alt="">
-  </div>
+  <script>
+    function showProject(id){
+      document.querySelector('.projects-grid').style.display='none';
+      document.getElementById(id).style.display='block';
+    }
 
-  <div class="project-detail" id="p4">
-    <span class="back-btn">← 뒤로가기</span>
-    <h2>프로젝트 4</h2>
-    <p>허거덩</p>
-    <img src="port_images/test2.jpg" alt="">
-    <img src="img8.jpg" alt="">
-  </div>
-</section>
+    function hideProject(){
+      document.querySelectorAll('.project-detail').forEach(d => d.style.display='none');
+      document.querySelector('.projects-grid').style.display='grid';
+    }
 
-<div class="overlay"><img src="" alt=""></div>
+    const modal = document.querySelector('.modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalCaption = document.getElementById('modal-caption');
 
-<script>
-  const thumbnails = document.querySelectorAll('.thumbnail');
-  const projectDetails = document.querySelectorAll('.project-detail');
-  const overlay = document.querySelector('.overlay');
-  const overlayImg = overlay.querySelector('img');
-
-  thumbnails.forEach(th => {
-    th.addEventListener('click', () => {
-      document.querySelector('.thumbnail-container').style.display = 'none';
-      document.getElementById(th.dataset.project).style.display = 'block';
+    document.querySelectorAll('.project-detail img').forEach(img=>{
+      img.addEventListener('click', ()=>{
+        modalImg.src = img.src;
+        modalCaption.textContent = img.alt;
+        modal.style.display='flex';
+      });
     });
-  });
 
-  document.querySelectorAll('.back-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      projectDetails.forEach(d => d.style.display = 'none');
-      document.querySelector('.thumbnail-container').style.display = 'flex';
-    });
-  });
-
-  document.querySelectorAll('.project-detail img').forEach(img => {
-    img.addEventListener('click', () => {
-      overlayImg.src = img.src;
-      overlay.style.display = 'flex';
-    });
-  });
-
-  overlay.addEventListener('click', () => {
-    overlay.style.display = 'none';
-  });
-</script>
+    function hideModal(){
+      modal.style.display='none';
+    }
+  </script>
 
 </body>
 </html>
