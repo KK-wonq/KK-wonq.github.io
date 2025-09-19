@@ -167,6 +167,15 @@
       padding: 20px;
       z-index: 999;
     }
+    #project-detail {
+      display: none;
+      position: relative; /* 또는 fixed/absolute */
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      z-index: 100;
+    }
     
     
   </style>
@@ -225,6 +234,10 @@
       <div class="project-card" onclick="showProject('p6')">
         <img src="port_images/images-part/wazuh.PNG" alt="Wazuh 썸네일">
         <p>Wazuh 구축</p>
+      </div>
+      <div class="project-card" onclick="openDetail('network')">
+        <img src="port_images/images-part/network-title.jpg" alt="네트워크 보안 썸네일">
+        <p>네트워크 보안 통합</p>
       </div>
     </div>
   </section>
@@ -404,6 +417,20 @@
       </div>
     </div>
   </div>
+  
+  <!--네트워크 보안 통합-->
+  <!-- 동적으로 detail 불러올 컨테이너 -->
+  <div class="project-detail" id="network">
+  <span class="back-btn" onclick="hideProject()">← 뒤로가기</span>
+  <h2>네트워크 보안 통합</h2>
+    <div class="detail-grid" id="network-cards">
+      
+      
+      
+    </div>
+  </div>
+  <div id="project-detail" style="display:none;"></div>
+
 
 </main>
 
@@ -417,28 +444,196 @@
 </div>
 
 <script>
-function showProject(id){
-  document.querySelector('.projects-grid').style.display='none';
-  document.querySelectorAll('.project-detail').forEach(d=>d.style.display='none');
-  document.getElementById(id).style.display='block';
-}
-function hideProject(){
-  document.querySelectorAll('.project-detail').forEach(d=>d.style.display='none');
-  document.querySelector('.projects-grid').style.display='grid';
-}
+    function showProject(id){
+      document.querySelector('.projects-grid').style.display='none';
+      document.querySelectorAll('.project-detail').forEach(d=>d.style.display='none');
+      document.getElementById(id).style.display='block';
+    }
+    function hideProject(){
+      document.querySelectorAll('.project-detail').forEach(d=>d.style.display='none');
+      document.querySelector('.projects-grid').style.display='grid';
+    }
 
-const modal = document.querySelector('.modal');
-const modalImg = document.getElementById('modal-img');
-const modalCaption = document.getElementById('modal-caption');
+    const modal = document.querySelector('.modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalCaption = document.getElementById('modal-caption');
 
-function openModal(img){
-  modal.style.display='flex';
-  modalImg.src = img.src;
-  modalCaption.textContent = img.alt;
-}
-function hideModal(){
-  modal.style.display='none';
-}
+    function openModal(img){
+      modal.style.display='flex';
+      modalImg.src = img.src;
+      modalCaption.textContent = img.alt;
+    }
+    function hideModal(){
+      modal.style.display='none';
+    }
+  
+  
+    const detailStack = [];
+    const detailContainer = document.getElementById("project-detail");
+
+    const detailData = {
+      network: `
+        <span class="back-btn" onclick="goBack()">← 뒤로가기</span>
+        <h2>네트워크 보안 통합</h2>
+        <div class="detail-grid">
+          <div class="project-card" onclick="openDetail('GNS3')">
+            <img src="port_images/images-part/GNS3/topology.png" alt="GNS3">
+            <p>Sub Project 1</p>
+          </div>
+
+          <div class="project-card" onclick="openDetail('OSSEC')">
+            <img src="port_images/images-part/OSSEC/ossec.jpg" alt="ossec 썸네일">
+            <p>Sub Project 2</p>
+          </div>
+
+          <div class="project-card" onclick="openDetail('VPN')">
+            <img src="port_images/images-part/VPN/vpn.png" alt="Vpn 썸네일">
+            <p>Sub Project 2</p>
+          </div>
+
+          <div class="project-card" onclick="openDetail('Snort')">
+            <img src="port_images/images-part/snort.jpg" alt="Snort 썸네일">
+            <p>Sub Project 2</p>
+          </div>
+
+          <div class="project-card" onclick="openDetail('Zabbix')">
+            <img src="port_images/images-part/zabbix-title.png" alt="Zabbix 썸네일">
+            <p>Sub Project 2</p>
+          </div>
+        </div>
+      `,
+      
+      GNS3: `
+        <span class="back-btn" onclick="goBack()">← 뒤로가기</span>
+        <h3>Sub Project 1 Detail</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <p>Pfsense Rule 작성</p>
+            <img src="port_images/images-part/GNS3/pfrule.png" alt="Sub1" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>ASAv Rule 작성</p>
+            <img src="port_images/images-part/GNS3/AsaVrule.png" alt="Asa" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>ASAv Rule 1. PC7 -> inside https, telnet</p>
+            <img src="port_images/images-part/GNS3/DVWA-inside_https.png" alt="" onclick="openModal(this)">
+            <img src="port_images/images-part/GNS3/DVWA-inside_telnet.png" alt="" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>ASAv Rule 2. PC7 -> R3 ping 가능</p>
+            <img src="port_images/images-part/GNS3/PC7-R3_ping.png" alt="Asa" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>ASAv Rule 3. R2 -> R4 SSH 가능</p>
+            <img src="port_images/images-part/GNS3/R2-R4_SSH.png" alt="Asa" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>R3 에 라우터 룰 적용</p>
+            <img src="port_images/images-part/GNS3/R3-rule.png" alt="Asa" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>R3 에 라우터 룰 적용</p>
+            <img src="port_images/images-part/GNS3/R3-rule.png" alt="Asa" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>R3 rule 1. R2 -> Kali SSH  접속 (R2->R3으로 대체)</p>
+            <img src="port_images/images-part/GNS3/R2-Kali_SSH.png" alt="Asa" onclick="openModal(this)">
+          </div>
+        </div>
+      `,
+      OSSEC: `
+        <span class="back-btn" onclick="goBack()">← 뒤로가기</span>
+        <h3>Sub Project 2 Detail</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <p>OSSEC server 구축</p>
+            <img src="port_images/images-part/OSSEC/ossec-server.png" alt="Sub2" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>OSSEC windows 연결</p>
+            <img src="port_images/images-part/OSSEC/ossec-window.png" alt="Sub2" onclick="openModal(this)">
+          </div>
+        </div>
+      `,
+      VPN: `
+        <span class="back-btn" onclick="goBack()">← 뒤로가기</span>
+        <h3>Sub Project 2 Detail</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <p>Pfsense 실행후</p>
+            <img src="port_images/images-part/VPN/Pfsense.png" alt="Sub2" onclick="openModal(this)">
+            <p>연결 완료된 모습</p>
+            <img src="port_images/images-part/VPN/access-remote.png" alt="Sub2" onclick="openModal(this)">
+          </div>
+        </div>
+      `,
+      Snort: `
+        <span class="back-btn" onclick="goBack()">← 뒤로가기</span>
+        <h3>Sub Project 2 Detail</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <p>작성된 Snort 룰</p>
+            <img src="port_images/images-part/snort-rule.png" alt="Sub2" onclick="openModal(this)">
+          </div>
+          <div class="detail-item">
+            <p>탐지된 결과</p>
+            <img src="port_images/images-part/snort-ids.png" alt="Sub2" onclick="openModal(this)">
+          </div>
+        </div>
+      `,
+      Zabbix: `
+        <span class="back-btn" onclick="goBack()">← 뒤로가기</span>
+        <h3>Sub Project 2 Detail</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <p>Zabbix 서버구축 완료된 모습</p>
+            <img src="port_images/images-part/zabbix.png" alt="Sub2" onclick="openModal(this)">
+          </div>
+        </div>
+      `
+      
+    };
+
+    function openDetail(key) {
+      detailStack.push(key);
+      renderDetail();
+    }
+
+    function goBack() {
+      detailStack.pop();
+      if (detailStack.length === 0) {
+        detailContainer.style.display = "none";
+        document.querySelector('.projects-grid').style.display = 'grid';
+      } else {
+        renderDetail();
+      }
+    }
+
+    function renderDetail() {
+      const currentKey = detailStack[detailStack.length - 1];
+      const currentDetail = detailData[currentKey];
+
+      if (!currentDetail) {
+        console.error("❌ detailData에 없는 key:", currentKey);
+        return;
+      }
+
+      // 모든 카드 숨기기
+      document.querySelector('.projects-grid').style.display = 'none';
+      if (currentKey !== 'network') {
+        document.getElementById('network').style.display = 'none';
+      }
+
+      detailContainer.innerHTML = currentDetail;
+      detailContainer.style.display = 'block';
+    }
+
+
+
+
+  
+  
 </script>
 
 </body>
