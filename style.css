@@ -242,20 +242,26 @@ header {
 }
 
 .modal-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  /* --- '뒤로가기'와 동일한 스타일 적용 --- */
   background: none;
-  border: none;
+  border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  font-size: 1.5rem;
+  padding: 0.4rem 0.8rem; /* 동일한 패딩 */
+  border-radius: var(--radius-m); /* 동일한 둥근 모서리 */
   cursor: pointer;
-  transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+  font-size: 0.9rem; /* 동일한 폰트 크기 */
+  transition: all var(--transition-speed) ease;
+  
+  /* --- 고유 스타일 --- */
+  position: static; /* absolute(절대위치)가 아니어야 함 */
+  line-height: 1.2; /* '✖' 문자가 세로 중앙에 오도록 미세조정 */
 }
   
 .modal-close-btn:hover {
-  color: white;
-  transform: rotate(90deg);
+  background-color: var(--bg-surface-hover);
+  color: var(--text-main);
+  border-color: var(--text-main);
+  transform: none; /* 기존의 rotate(90deg) 효과 제거 */
 }
 
 #project-detail-title {
