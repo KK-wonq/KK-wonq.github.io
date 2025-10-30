@@ -97,17 +97,6 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-      // --- Splash Screen Logic ---
-      window.addEventListener("load", () => {
-        const splash = document.getElementById("splash");
-        setTimeout(() => {
-          splash.classList.add("fade-out");
-        }, 1500); // 1.5초 후 페이드아웃
-      });
-
-      // --- Project Data ---
       const portfolioData = {
         gns3: {
           title: "GNS3 네트워크 토폴로지",
@@ -172,83 +161,8 @@
           ]
         }
       };
-      
-      // --- Modal Elements ---
-      const modal = document.getElementById('project-modal');
-      const modalCloseBtn = document.getElementById('modal-close');
-      const modalTitle = document.getElementById('project-detail-title');
-      const modalDescription = document.getElementById('project-detail-description');
-      const modalImagesGrid = document.getElementById('project-detail-images');
-      
-      // --- Lightbox Elements ---
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImage = document.getElementById('lightbox-image');
-
-      // --- Functions ---
-      function openModal(projectId) {
-        const project = portfolioData[projectId];
-        if (!project) return;
-
-        modalTitle.textContent = project.title;
-        modalDescription.textContent = project.description;
-        modalImagesGrid.innerHTML = ''; // Clear previous images
-
-        project.images.forEach(image => {
-          const item = document.createElement('div');
-          item.className = 'detail-image-item';
-          item.innerHTML = `
-            <img src="${image.src}" alt="${image.caption}" loading="lazy">
-            <p>${image.caption}</p>
-          `;
-          item.addEventListener('click', () => openLightbox(image.src));
-          modalImagesGrid.appendChild(item);
-        });
-
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-      }
-
-      function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      function openLightbox(src) {
-        lightboxImage.src = src;
-        lightbox.classList.add('active');
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-      }
-
-      // --- Event Listeners ---
-      document.querySelectorAll('.project-card').forEach(card => {
-        const projectId = card.dataset.projectId;
-        card.addEventListener('click', () => openModal(projectId));
-        card.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') openModal(projectId);
-        });
-      });
-
-      modalCloseBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal(); // Close only if overlay is clicked
-      });
-
-      lightbox.addEventListener('click', closeLightbox);
-      
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (lightbox.classList.contains('active')) {
-            closeLightbox();
-          } else if (modal.classList.contains('active')) {
-            closeModal();
-          }
-        }
-      });
-
-    });
+    
   </script>
+  <script src="main.js" defer></script>
 </body>
 </html>
