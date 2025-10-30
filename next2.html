@@ -84,10 +84,7 @@
     <img id="lightbox-image" src="" alt="확대 이미지">
   </div>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // --- 5. 여기에 이 페이지에 맞는 새 프로젝트 데이터를 입력하세요 ---
+  <script>  // --- 5. 여기에 이 페이지에 맞는 새 프로젝트 데이터를 입력하세요 ---
     const portfolioData = {
       // 위에서 추가한 'data-project-id'와 일치하는 key를 사용하세요
       gns3: {
@@ -257,125 +254,7 @@
         `
       }
     };
-    
-    // --- 이하 자바스크립트 로직은 수정할 필요가 없습니다 ---
-    
-    const modal = document.getElementById('project-modal');
-    const modalCloseBtn = document.getElementById('modal-close');
-    const modalBackBtn = document.getElementById('modal-back');
-    const modalTitle = document.getElementById('project-detail-title');
-    const modalDescription = document.getElementById('project-detail-description');
-    const modalContent = document.getElementById('project-detail-content');
-    
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-
-    const navigationStack = [];
-
-    function renderModalContent(projectId) {
-      const project = portfolioData[projectId];
-      if (!project) return;
-
-      if (navigationStack[navigationStack.length - 1] !== projectId) {
-          navigationStack.push(projectId);
-      }
-      
-      modalTitle.textContent = project.title;
-      modalDescription.textContent = project.description;
-      modalContent.innerHTML = ''; // 내용을 비웁니다.
-
-      // [추가] 'htmlContent' (블로그 형식)이 있는지 확인합니다.
-      if (project.htmlContent) {
-        // "블로그" 경로
-        const blogContainer = document.createElement('div');
-        blogContainer.className = 'blog-content'; // CSS 스타일을 위한 클래스
-        blogContainer.innerHTML = project.htmlContent;
-        modalContent.appendChild(blogContainer);
-
-        // [추가] 블로그 내용 안의 이미지에도 라이트박스를 적용합니다.
-        blogContainer.querySelectorAll('img').forEach(img => {
-          img.addEventListener('click', () => openLightbox(img.src));
-          // img.style.cursor = 'pointer'; // 클릭 가능하게 보이도록 (선택 사항)
-        });
-
-      } else if (project.images || project.subProjects) {
-        // "기존 그리드" 경로
-        const grid = document.createElement('div');
-        grid.className = 'detail-grid';
-
-        if (project.images) {
-            project.images.forEach(image => {
-                const item = document.createElement('div');
-                item.className = 'detail-item';
-                item.innerHTML = `<img src="${image.src}" alt="${image.caption}" loading="lazy"><p>${image.caption}</p>`;
-                item.addEventListener('click', () => openLightbox(image.src));
-                grid.appendChild(item);
-            });
-        } 
-        
-        if (project.subProjects) {
-            for (const key in project.subProjects) {
-                const sub = project.subProjects[key];
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.innerHTML = `<img src="${sub.thumbnail}" alt="${sub.title}" class="project-card-thumbnail"><div class="project-card-content"><p>${sub.title}</p></div>`;
-                card.addEventListener('click', () => renderModalContent(key));
-                grid.appendChild(card);
-            }
-        }
-        
-        modalContent.appendChild(grid);
-      }
-      
-      modalBackBtn.style.display = navigationStack.length > 1 ? 'block' : 'none';
-    }
-
-    function openModal(projectId) {
-      navigationStack.length = 0; 
-      renderModalContent(projectId);
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function goBack() {
-        navigationStack.pop(); 
-        if (navigationStack.length > 0) {
-            const prevProjectId = navigationStack[navigationStack.length - 1]; 
-            renderModalContent(prevProjectId);
-        }
-    }
-
-    function openLightbox(src) {
-      lightboxImage.src = src;
-      lightbox.classList.add('active');
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-    }
-
-    // --- Event Listeners ---
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('click', () => openModal(card.dataset.projectId));
-    });
-
-    modalCloseBtn.addEventListener('click', closeModal);
-    modalBackBtn.addEventListener('click', goBack);
-    modal.addEventListener('click', e => e.target === modal && closeModal());
-    lightbox.addEventListener('click', closeLightbox);
-    
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        if (lightbox.classList.contains('active')) closeLightbox();
-        else if (modal.classList.contains('active')) closeModal();
-      }
-    });
-  });
   </script>
+  <script src="main.js" defer></script>
 </body>
 </html>
