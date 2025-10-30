@@ -363,7 +363,6 @@ header {
 /* 1. 모달 헤더 (뒤로가기/닫기 버튼 정렬) */
 .modal-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
   /* 닫기 버튼이 absolute가 아니므로, 헤더가 공간을 차지하게 함 */
@@ -391,6 +390,7 @@ header {
   position: static; /* absolute(절대위치) 해제 */
   font-size: 1.2rem;
   padding: 0.2rem 0.5rem;
+  margin-left: auto;
 }
 
 /* 4. 블로그 콘텐츠 스타일 (예전 코드) */
