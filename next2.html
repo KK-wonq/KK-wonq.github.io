@@ -249,6 +249,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 2 : Login-Admin</h3>
+          <img src="part2-image/Juicy/login-admin/1-1.png">
           <p>관리자로 로그인해야하는 문제입니다. 그러기 위해선 로그아웃 후 로그인 페이지로 이동해야합니다.</p>
           <img src="part2-image/Juicy/login-admin/1-2.png" alt="1">
           <p>Email 부분에 SQL인젝션을 시도해볼 수 있습니다. 먼저 ' 을 입력해보면 [object][object] 라는 문구가 위에 나타납니다. 인젝션이 되는 부분이라는 것이죠.</p>
@@ -263,6 +264,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 2 : Password Strength</h3>
+          <img src="part2-image/Juicy/password/2-1.png">
           <p>인젝션을 사용하지 않고 관리자로 로그인해야 합니다. 그러기 위해선 다시 로그아웃 후, 로그인 페이지로 이동합니다.</p>
           <img src="part2-image/Juicy/password/2-2.png" alt="3">
           <p>앞선 login-admin 문제를 통해 admin계정의 메일을 알아내었습니다.</p>
@@ -278,6 +280,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 2 : Exposed credentials</h3>
+          <img src="part2-image/Juicy/exposed/3-1.png">
           <p>노출된 자격증명. 개발자가 클라이언트 측 테스트 계정에 대해 여전히 유효한 자격 증명을 하드코딩하지 않았습니다.</p>
           <p>그것을 찾아내 테스트계정으로 로그인 해보겠습니다. 먼저 개발자 모드로 들어가 js 코드를 살펴봅니다.</p>
           <p>Ctrl+Shift+F 키로 Search 탭을 열어서 username,password 등을 찾아봅니다.</p>
@@ -293,6 +296,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 2 : View Basket</h3>
+          <img src="part2-image/Juicy/view/5-1.png">
           <p>다른 사용자의 바구니를 봐야하는 문제입니다. 일단 먼저 장바구니 페이지로 이동합니다.</p>
           <img src="part2-image/Juicy/view/5-2.png" alt="7">
           <p><strong>(해당 장바구니는 admin계정의 장바구니입니다)</strong></p>
@@ -309,6 +313,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 2 : Deprecated Interface</h3>
+          <img src="part2-image/Juicy/security/6-1.png">
           <p>더 이상 사용되지 않는 인터페이스. 더 이상 사용되지 않는데 제대로 종료되지 않은 B2B 인터페이스를 찾아서 사용해보는 문제입니다.</p>
           <p>먼저 B2B 인터페이스란, 기업간에 상품, 서비스, 데이터를 교환하고 소통하기 위한 소프트웨어 인터페이스를 말합니다.</p>
           <p>그렇다면 이런 웹페이지에는 더 이상 사용하지 않는 업로드 인터페이스 등이 있을 것입니다. 컴플레인을 보낼 수 있는 페이지에 upload 할 수 있는 인터페이스가 있습니다.</p>
@@ -329,6 +334,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 1 : DOM XSS</h3>
+          <img src="part2-image/Juicy/dom/7-1.png">
           <p>html 코드 안에 특정 스크립트를 삽입하여 공격하는 문제입니다. 설명글에 나와 있듯이 <strong><iframe src="javascript:alert('xss')"></strong>를 어딘가 XSS취약점이 있는 곳에 삽입하여 공격하면 됩니다.</p>
           <p>보통은 검색을 할 수 있는 검색창에 취약점이 있기 마련입니다.</p>
           <img src="part2-image/Juicy/dom/7-2.png" alt="14">
@@ -344,6 +350,7 @@
         // 여기도 'htmlContent'를 사용합니다.
         htmlContent: `
           <h3>Level 5 : Kill ChatBot</h3>
+          <img src="part2-image/Juicy/kill/9-1.png">
           <p>알려진 취약점이 있는 구성요소 사용. 관련문제입니다. 고객문의에 사용되는 챗봇을 영구적으로 비활성해야 합니다.</p>
           <p>먼저 구글에 juicy-chat-bot 을 치면 깃허브 사이트가 나옵니다.</p>
           <p><strong>https://github.com/juice-shop/juicy-chat-bot/blob/master</strong> 이 사이트로 가면 챗봇의 js파일을 확인할 수 있습니다.</p>
