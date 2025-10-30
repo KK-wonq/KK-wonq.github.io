@@ -325,8 +325,8 @@ header {
     visibility: visible;
 }
 #lightbox img {
-    max-width: 95%;
-    max-height: 90vh;
+    max-width: 98%;     /* [수정] 95% -> 98% (좌우 여백 줄이기) */
+    max-height: 95vh;   /* [수정] 90vh -> 95vh (상하 여백 줄이기) */
     object-fit: contain;
     border-radius: var(--radius-m);
 }
