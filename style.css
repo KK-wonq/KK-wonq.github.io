@@ -348,3 +348,72 @@ header {
   border: 3px solid #e0e0e0;
   background-clip: padding-box;
 }
+
+/* =============================================================
+  [추가] 모달 헤더 및 블로그 콘텐츠 스타일
+  =============================================================
+*/
+
+/* 1. 모달 헤더 (뒤로가기/닫기 버튼 정렬) */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  /* 닫기 버튼이 absolute가 아니므로, 헤더가 공간을 차지하게 함 */
+}
+
+/* 2. 뒤로가기 버튼 */
+.modal-back-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+}
+.modal-back-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-main);
+  border-color: var(--text-main);
+}
+
+/* 3. 닫기 버튼 (위치 재조정) */
+.modal-close-btn {
+  position: static; /* absolute(절대위치) 해제 */
+  font-size: 1.2rem;
+  padding: 0.2rem 0.5rem;
+}
+
+/* 4. 블로그 콘텐츠 스타일 (예전 코드) */
+.blog-content {
+  padding: 0 10px;
+  line-height: 1.7;
+}
+.blog-content h3 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color); /* 다크모드에 맞게 수정 */
+}
+.blog-content p {
+  margin-bottom: 16px;
+}
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-m); /* var(--radius-m) 사용 */
+  margin: 10px 0;
+  box-shadow: 0 2px 8px var(--shadow-color); /* var(--shadow-color) 사용 */
+  cursor: zoom-in;
+}
+.blog-content pre {
+  background-color: var(--bg-dark); /* 다크모드에 맞게 수정 */
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: var(--radius-m);
+  overflow-x: auto;
+  color: var(--text-main);
+}
