@@ -39,6 +39,34 @@ h1, h2, h3 {
   letter-spacing: -0.5px;
 }
 
+/* --- Splash Screen --- */
+#splash {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-dark);
+  display: grid;
+  place-items: center;
+  z-index: 10000;
+  transition: opacity 0.8s ease-out, visibility 0.8s;
+}
+
+#splash.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#splash h1 {
+  font-size: clamp(2rem, 10vw, 4rem);
+  color: var(--primary);
+  animation: tracking-in-expand 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@keyframes tracking-in-expand {
+  0% { letter-spacing: -0.5em; opacity: 0; }
+  40% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+  
 /* --- Layout & Header --- */
 .container {
   max-width: 1100px;
@@ -75,7 +103,7 @@ header {
   color: white;
   box-shadow: 0 4px 15px var(--shadow-color);
 }
-
+  
 .profile-info h1 {
   font-size: 1.75rem;
   color: white;
@@ -86,13 +114,12 @@ header {
   color: var(--text-secondary);
 }
 
-/* --- Header Actions & Button --- */
+/* --- Header Actions & Button (추가) --- */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* 버튼 사이 간격 추가 (이전 요청 반영) */
 }
-
+  
 .btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
@@ -167,14 +194,14 @@ header {
   flex-direction: column;
   justify-content: center;
 }
-
+  
 .project-card-content p {
   font-size: 1.1rem;
   font-weight: 500;
   text-align: center;
   color: var(--text-main);
 }
-
+  
 /* --- Project Detail Modal --- */
 .modal-overlay {
   position: fixed;
@@ -213,29 +240,6 @@ header {
   transform: scale(1);
 }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.modal-back-btn {
-    background: none;
-    border: 1px solid var(--text-secondary);
-    color: var(--text-secondary);
-    padding: 0.3rem 0.8rem;
-    border-radius: var(--radius-m);
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all var(--transition-speed) ease;
-}
-.modal-back-btn:hover {
-    background-color: var(--bg-surface-hover);
-    color: white;
-    border-color: white;
-}
-
 .modal-close-btn {
   position: absolute;
   top: 1rem;
@@ -247,7 +251,7 @@ header {
   cursor: pointer;
   transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
 }
-
+  
 .modal-close-btn:hover {
   color: white;
   transform: rotate(90deg);
@@ -255,6 +259,7 @@ header {
 
 #project-detail-title {
     font-size: 2.2rem;
+    margin-bottom: 0.5rem;
     color: var(--primary);
 }
 #project-detail-description {
@@ -264,43 +269,33 @@ header {
     max-width: 80ch;
 }
 
-.detail-grid {
+.detail-images-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
 }
 
-.detail-item {
+.detail-image-item {
     border-radius: var(--radius-m);
     overflow: hidden;
     cursor: pointer;
-    background-color: var(--bg-dark);
 }
-.detail-item img {
+.detail-image-item img {
     width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
     transition: transform var(--transition-speed) ease;
 }
-.detail-item:hover img {
+.detail-image-item:hover img {
     transform: scale(1.05);
 }
-.detail-item p {
-    padding: 0.75rem;
+.detail-image-item p {
+    background-color: rgba(0,0,0,0.5);
+    padding: 0.5rem;
     font-size: 0.85rem;
     text-align: center;
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-
-/* Special styling for subproject card inside a modal */
-.detail-grid .project-card {
-    height: 100%;
-}
-
 
 /* --- Image Lightbox --- */
 #lightbox {
@@ -326,85 +321,28 @@ header {
     object-fit: contain;
     border-radius: var(--radius-m);
 }
-/* [추가] 블로그 콘텐츠 스타일 */
-.blog-content {
-  padding: 0 10px; /* 좌우 여백 */
-  line-height: 1.7; /* 줄 간격 */
-}
 
-/* 블로그 h3 (소제목) */
-.blog-content h3 {
-  margin-top: 24px;
-  margin-bottom: 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #eee;
-}
-
-/* 블로그 p (본문) */
-.blog-content p {
-  margin-bottom: 16px;
-}
-
-/* 블로그 img (이미지) */
-.blog-content img {
-  max-width: 100%; /* 모달을 넘지 않도록 함 */
-  height: auto;
-  border-radius: 8px; /* 이미지 모서리 둥글게 */
-  margin: 10px 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* 그림자 */
-  cursor: zoom-in; /* 클릭 가능 표시 */
-}
-
-/* 블로그 pre/code (코드 블록) */
-.blog-content pre {
-  background-color: #f4f4f4;
-  padding: 16px;
-  border-radius: 8px;
-  overflow-x: auto; /* 코드가 길면 스크롤 */
-  font-family: 'Courier New', Courier, monospace;
-}
-/* [추가] 스크롤바 스타일 */
-
-/* [수정] 세련된 파스텔 그라데이션 스크롤바 */
-
-/* 스크롤바 전체 너비 */
+/* =============================================================
+  [추가] 이전 대화에서 만든 스크롤바 스타일
+  =============================================================
+*/
 ::-webkit-scrollbar {
   width: 12px;
 }
 
-/* [수정] 진한 파란색 + 회색 테두리 스크롤바 */
-
-/* 스크롤바 전체 너비 */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-/* 스크롤바 트랙 (배경) */
 ::-webkit-scrollbar-track {
-  /* 트랙 배경을 약간 어두운 회색으로 변경 (#f1f1f1 -> #e0e0e0) */
   background: #e0e0e0;
 }
 
-/* 스크롤바 핸들 (움직이는 막대) */
 ::-webkit-scrollbar-thumb {
-  /* 1. 파란색을 더 진하게 변경 */
   background: linear-gradient(45deg, #64b5f6, #1e88e5);
-  
-  /* 2. 모서리 둥글게 */
   border-radius: 10px;
-
-  /* 3. 테두리 효과 (★핵심★) */
-  /* 트랙과 동일한 회색(#e0e0e0)으로 3px 테두리를 줍니다. */
   border: 3px solid #e0e0e0;
-  
-  /* 4. 테두리(border) 안쪽에만 배경을 칠함 */
   background-clip: padding-box;
 }
 
-/* 마우스를 올렸을 때 핸들 (더 진한 파란색 그라데이션) */
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #42a5f5, #1565c0);
-  /* hover 시에도 테두리 효과는 동일하게 유지 */
   border-radius: 10px;
   border: 3px solid #e0e0e0;
   background-clip: padding-box;
