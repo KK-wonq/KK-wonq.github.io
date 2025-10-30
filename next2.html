@@ -55,8 +55,8 @@
             <div class="project-card-content"><p>보안 로그 분석</p></div>
           </div>
           <div class="project-card" data-project-id="ctf" tabindex="0">
-            <img src="part2-image/ctf/ctf-thumbnail.png" alt="CTF 썸네일" class="project-card-thumbnail" loading="lazy">
-            <div class="project-card-content"><p>CTF 풀이 과정</p></div>
+            <img src="part2-image/ctf/bluemoon.png" alt="CTF 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>CTF 풀이 과정(Bluemoon)</p></div>
           </div>
           <div class="project-card" data-project-id="juice-shop" tabindex="0">
             <img src="part2-image/juice-shop/juice-shop-thumbnail.png" alt="Juice-shop 썸네일" class="project-card-thumbnail" loading="lazy">
@@ -170,22 +170,56 @@
       },
       
       ctf: {
-        title: "CTF 풀이 과정 (문제이름)",
-        description: "Webhacking.kr 또는 특정 CTF 문제 풀이 과정입니다.",
+        title: "CTF 풀이 과정 (Vulnhub-bluemoon)",
+        description: "Bluemoon CTF 문제 풀이 과정입니다.",
         // [중요] 'images' 대신 'htmlContent'를 사용합니다.
         // 여기에 H3, p, img 태그를 자유롭게 넣어 블로그처럼 만듭니다.
         htmlContent: ` 
-          <h3>1. 문제 분석</h3>
-          <p>문제 페이지에 접속하면 다음과 같은 화면이 나옵니다. 소스 코드를 분석해 보니...</p>
-          <img src="part2-image/ctf/ctf-step1.png" alt="문제 분석 스크린샷">
+          <h3>1. IP 주소 찾기</h3>
+          <p>먼저 ova 파일 다운 후, 불러오기를 한 다음 맥주소를 확인합니다.</p>
+          <img src="part2-image/ctf/1.png" alt="문제 분석 스크린샷">
+          <p>그 다음 netdiscover 명령어로 맥주소가 같은 ip 주소를 확인합니다.</p>
+          <img src="part2-image/ctf/2.png" alt="문제 분석 스크린샷">
           
-          <h3>2. 취약점 발견</h3>
-          <p>특정 입력값에서 SQL 인젝션 취약점이 발견되었습니다. ' OR '1'='1'-- 구문을 입력했을 때...</p>
-          <img src="part2-image/ctf/ctf-step2.png" alt="취약점 발견 스크린샷">
+          <h3>2. 취약점 찾기</h3>
+          <p>nmap 스캐닝으로 열려있는 포트를 확인합니다.</p>
+          <img src="part2-image/ctf/3.png" alt="취약점 발견 스크린샷">
+          <p>확인 결과 21번 ftp, 22번 ssh, 80번으로 http가 열려있습니다.</p>
+          <p>해당 웹페이지 아래 폴더가 더 있는지 gobuster 로 확인해봅니다.</p>
+          <img src="part2-image/ctf/4.png" alt="문제 분석 스크린샷">
+          <p>hidden_text 라는 것을 찾았습니다. 안으로 들어가면 어느 문구가 나오게됩니다.</p>
+          <img src="part2-image/ctf/5.png" alt="문제 분석 스크린샷">
+          <p>글자 아래 있는 Thank you 링크를 누르게 되면, 큐알이 나오는데</p>
+          <img src="part2-image/ctf/6.png" alt="문제 분석 스크린샷">
+          <p>휴대폰으로 찍어도 되지만, Decode 사이트로 들어가서 확인해보겠습니다.</p>
+          <img src="part2-image/ctf/7.png" alt="문제 분석 스크린샷">
+          <img src="part2-image/ctf/8.png" alt="문제 분석 스크린샷">
+          <p>디코딩 사이트 zxing.org 에 들어가서 이미지파일을 넣거나 링크를 넣게되면 결과를 확인할 수 있습니다.</p>
+          <p>ftp 유저이름과 패스워드를 획득했습니다.</p>
+          <img src="part2-image/ctf/9.png" alt="문제 분석 스크린샷">
+          <p>이것으로 ftp 에 접속하여 보니 두개의 파일을 확인할 수 있습니다. get 명령어로 다운받은 다음, cat으로 파일 내용을 확인해보겠습니다.</p>
+          <img src="part2-image/ctf/10.png" alt="문제 분석 스크린샷">
+          <img src="part2-image/ctf/11.png" alt="문제 분석 스크린샷">
+          <p>하나는 robin이라는 유저네임을 알려주는 듯한 파일이고, 하나는 패스워드 wordlists 로 보입니다. 이걸 통해 hydra 로 ssh 접속 패스워드를 알아내보겠습니다.</p>
+          <img src="part2-image/ctf/12.png" alt="문제 분석 스크린샷">
+          <img src="part2-image/ctf/13.png" alt="문제 분석 스크린샷">
+          <p>돌려본 결과 robin 으로 접속하는 비밀번호가 나왔습니다.</p>
 
           <h3>3. 플래그 획득</h3>
-          <p>최종적으로 페이로드를 완성하여 플래그를 획득했습니다.</p>
-          <pre><code>alert('pwned')</code></pre>
+          <img src="part2-image/ctf/14.png" alt="문제 분석 스크린샷">
+          <p>정상적으로 ssh 로그인 후 첫번째 플래그를 획득하였습니다.</p>
+          <img src="part2-image/ctf/15.png" alt="문제 분석 스크린샷">
+          <p>그 후 폴더 project 안에 있는 feedback.sh 를 확인해볼 수 있었습니다.</p>
+          <img src="part2-image/ctf/16.png" alt="문제 분석 스크린샷">
+          <p>sudo -l 명령어를 통해 jerry 라는 사용자로 실행시킬 수 있다는 것을 알았습니다. 그렇다면 sudo -u jerry 명령어를 추가해 실행시킵니다.</p>
+          <img src="part2-image/ctf/17.png" alt="문제 분석 스크린샷">
+          <img src="part2-image/ctf/18.png" alt="문제 분석 스크린샷">
+          <p>jerry 라고 입력 후 /bin/bash 를 입력하니 jerry 사용자로 상승된 것을 확인할 수 있습니다.</p>
+          <img src="part2-image/ctf/19.png" alt="문제 분석 스크린샷">
+          <p>id 를 입력해보니 docker 를 실행 중인 것을 확인 할 수 있습니다. docker images 로 alpine 를 찾아볼 수 있고, 이것으로 /mnt 폴더에 root 폴더를 마운트해 셸을 요청하는 명령어를 실행할 수 있습니다.</p>
+          <img src="part2-image/ctf/20.png" alt="문제 분석 스크린샷">
+          <p>이렇게 root Flag 까지 획득하였습니다.</p>
+          
         `
       },
 
