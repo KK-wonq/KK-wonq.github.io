@@ -50,6 +50,10 @@
             <img src="part2-image/dns,hids,nips,nms(zabbix)/nail.png" alt="dns" class="project-card-thumbnail" loading="lazy">
             <div class="project-card-content"><p>서버구축 및 NIDS</p></div>
           </div>
+          <div class="project-card" data-project-id="wazuh" tabindex="0">
+            <img src="part2-image/dns,hids,nips,nms(zabbix)/nail.png" alt="dns" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>보안 로그 분석</p></div>
+          </div>
         </div>
       </section>
     </main>
@@ -95,16 +99,51 @@
       },
       dns: {
         title: "서버구축 및 보안 로그 분석, NIDS 구축",
+        description: "dns, HIDS 등 구축",
+        subProjects: {
+          'sub-project-a': { title: "DNS 구축 후 확인", thumbnail: "part2-image/dns,hids,nips,nms(zabbix)/dns-nail.png" }
+        }
+        subProjects: {
+          'sub-project-b': { title: "HIDS 구축 후 확인", thumbnail: "part2-image/dns,hids,nips,nms(zabbix)/hids-nail.png" }
+        }
+        images: [
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/zabbix.png", caption: "zabbix 구축 후 연결상태 체크" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/suricata.png", caption: "NIDS-Suricata 구축 후 탐지로그" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/snort.png", caption: "NIDS-Snort 구축 후 탐지로그" }
+         ]
+      },
+      dns: {
+        title: "서버구축 및 보안 로그 분석, NIDS 구축",
         description: "dns, Wazuh 등 구축",
         subProjects: {
           'sub-project-a': { title: "DNS 구축 후 확인", thumbnail: "part2-image/dns,hids,nips,nms(zabbix)/dns-nail.png" }
         }
+        subProjects: {
+          'sub-project-b': { title: "HIDS 구축 후 확인", thumbnail: "part2-image/dns,hids,nips,nms(zabbix)/hids-nail.png" }
+        }
+        images: [
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/zabbix.png", caption: "zabbix 구축 후 연결상태 체크" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/suricata.png", caption: "NIDS-Suricata 구축 후 탐지로그" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/snort.png", caption: "NIDS-Snort 구축 후 탐지로그" }
+         ]
       },
+
+
+                            //dns 서브 프로젝트
       'sub-project-a': {
-         title: "하위 프로젝트 A 상세",
-         description: "이것은 하위 프로젝트 A의 내용입니다.",
+         title: "DNS 구축",
+         description: "DNS 를 구축 결과물",
          images: [
-           { src: "images/sub-a-detail.jpg", caption: "하위 프로젝트 상세 이미지" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/dns-1.png", caption: "DNS 구축을 위한 도메인 zone 파일 작성" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/dns-2.png", caption: "도메인으로 들어간 결과" }
+         ]
+      },
+      'sub-project-b': {
+         title: "HIDS-OSSEC 구축",
+         description: "HIDS-OSSEC 를 구축 결과물",
+         images: [
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/hids-1.png", caption: "HIDS 구축 후 에이전트 등록" }
+           { src: "part2-image/dns,hids,nips,nms(zabbix)/hids-2.png", caption: "에이전트 활동 로그 관찰 결과" }
          ]
       }
     };
