@@ -325,13 +325,15 @@ header {
     visibility: visible;
 }
 #lightbox img {
-    /* [수정] 화면에서 40px만 뺀 크기 (양쪽 20px 여백) */
-    max-width: calc(100% - 40px);
+    /* [수정] 화면에서 20px만 뺀 크기 (양쪽 10px 여백) */
+    max-width: calc(100% - 20px);
     
-    /* [수정] 화면 높이에서 40px만 뺀 크기 (상하 20px 여백) */
-    max-height: calc(100vh - 40px);
+    /* [수정] 화면 높이에서 20px만 뺀 크기 (상하 10px 여백) */
+    max-height: calc(100vh - 20px);
     
-    object-fit: contain;
+    /* [★필수★] 찌그러짐 방지 (이건 꼭 있어야 해요!) */
+    object-fit: contain; 
+    
     border-radius: var(--radius-m);
 }
 
