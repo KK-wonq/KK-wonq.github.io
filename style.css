@@ -365,23 +365,40 @@ header {
 }
 /* [추가] 스크롤바 스타일 */
 
-/* 스크롤바 전체 */
+/* [수정] 세련된 파스텔 그라데이션 스크롤바 */
+
+/* 스크롤바 전체 너비 */
 ::-webkit-scrollbar {
-  width: 10px; /* 스크롤바 너비 */
+  width: 12px;
 }
 
 /* 스크롤바 트랙 (배경) */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* 배경색은 연한 회색으로 */
+  /* 트랙 배경은 아주 연한 회색으로 설정 */
+  background: #f1f1f1;
 }
 
 /* 스크롤바 핸들 (움직이는 막대) */
 ::-webkit-scrollbar-thumb {
-  background: #007bff; /* ★★★ 여기가 파란색! ★★★ */
-  border-radius: 5px; /* 막대 모서리 둥글게 */
+  /* 1. 파스텔톤 그라데이션 (연한 하늘색 -> 연한 파란색) */
+  background: linear-gradient(45deg, #c2e9fb, #a1c4fd);
+  
+  /* 2. 막대 모서리를 둥글게 */
+  border-radius: 10px;
+
+  /* 3. 테두리 효과 (이게 핵심!) */
+  /* 트랙(f1f1f1)과 동일한 색으로 3px 테두리를 줍니다. */
+  border: 3px solid #f1f1f1;
+  
+  /* 4. 테두리(border)를 제외한 안쪽(padding-box)에만 배경을 칠합니다. */
+  background-clip: padding-box;
 }
 
-/* 스크롤바 핸들에 마우스 올렸을 때 */
+/* 마우스를 올렸을 때 핸들 (그라데이션 색을 살짝 진하게) */
 ::-webkit-scrollbar-thumb:hover {
-  background: #0056b3; /* 조금 더 진한 파란색 */
+  background: linear-gradient(45deg, #a1c4fd, #8aaff8);
+  /* hover 시에도 테두리 효과는 동일하게 유지 */
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+  background-clip: padding-box;
 }
