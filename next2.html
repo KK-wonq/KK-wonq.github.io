@@ -46,6 +46,10 @@
             <img src="part2-image/GNS3/topology.png" alt="gns3썸네일" class="project-card-thumbnail" loading="lazy">
             <div class="project-card-content"><p>GNS3 토폴로지 작성</p></div>
           </div>
+          <div class="project-card" data-project-id="dns" tabindex="0">
+            <img src="part2-image/dns,hids,nips,nms(zabbix)/" alt="dns" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>GNS3 토폴로지 작성</p></div>
+          </div>
         </div>
       </section>
     </main>
@@ -78,8 +82,15 @@
         title: "GNS3 작성",
         description: "GNS3 토폴로지 작성 후 네트워크 설정",
         images: [
-          { src: "", caption: "상세 이미지 1" },
-          { src: "images/new-project-1-detail-2.jpg", caption: "상세 이미지 2" }
+          { src: "part2-image/GNS3/topology.png", caption: "전체 토폴로지" }
+          { src: "part2-image/GNS3/vlan-topol.png", caption: "vlan 설정 topology" },
+          { src: "part2-image/GNS3/AC-ping.png", caption: "Attacker-A -> Attacker-C ping 확인" }
+          { src: "part2-image/GNS3/DC-ping.png", caption: "Attacker-D -> Attacker-C ping 확인" }
+          { src: "part2-image/GNS3/asav-rule1.png", caption: "ASAv-rule 작성 1. DNS->inside ping가능" }
+          { src: "part2-image/GNS3/rule2.png", caption: "rule 2. CTF->Wazuh ping 가능" }
+          { src: "part2-image/GNS3/rule3.png", caption: "rule 3. R2->R1 telnet 접속 가능" }
+          { src: "part2-image/GNS3/rule4.png", caption: "rule 4. R1->outside telnet 접속 가능." }
+          { src: "part2-image/GNS3/rule5.png", caption: "rule 5. Flare-VM->R1 http 접속 가능" }
         ]
       },
       'new-project-2': {
