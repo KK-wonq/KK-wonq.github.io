@@ -326,3 +326,40 @@ header {
     object-fit: contain;
     border-radius: var(--radius-m);
 }
+/* [추가] 블로그 콘텐츠 스타일 */
+.blog-content {
+  padding: 0 10px; /* 좌우 여백 */
+  line-height: 1.7; /* 줄 간격 */
+}
+
+/* 블로그 h3 (소제목) */
+.blog-content h3 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 블로그 p (본문) */
+.blog-content p {
+  margin-bottom: 16px;
+}
+
+/* 블로그 img (이미지) */
+.blog-content img {
+  max-width: 100%; /* 모달을 넘지 않도록 함 */
+  height: auto;
+  border-radius: 8px; /* 이미지 모서리 둥글게 */
+  margin: 10px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* 그림자 */
+  cursor: zoom-in; /* 클릭 가능 표시 */
+}
+
+/* 블로그 pre/code (코드 블록) */
+.blog-content pre {
+  background-color: #f4f4f4;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto; /* 코드가 길면 스크롤 */
+  font-family: 'Courier New', Courier, monospace;
+}
