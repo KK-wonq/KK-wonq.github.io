@@ -338,6 +338,26 @@
           <p>성공적으로 문제가 해결되었습니다.</p>
           `
       },
+      'using': {
+        title: "Kill Chatbot",
+        description: "Using Components with Known Vulnerabilities 문제인 Kill Chatbot 풀이과정",
+        // 여기도 'htmlContent'를 사용합니다.
+        htmlContent: `
+          <h3>Level 5 : Kill ChatBot</h3>
+          <p>알려진 취약점이 있는 구성요소 사용. 관련문제입니다. 고객문의에 사용되는 챗봇을 영구적으로 비활성해야 합니다.</p>
+          <p>먼저 구글에 juicy-chat-bot 을 치면 깃허브 사이트가 나옵니다.</p>
+          <p><strong>https://github.com/juice-shop/juicy-chat-bot/blob/master</strong> 이 사이트로 가면 챗봇의 js파일을 확인할 수 있습니다.</p>
+          <img src="part2-image/Juicy/kill/9-2.png" alt="17">
+          <img src="part2-image/Juicy/kill/9-3.png" alt="18">
+          <img src="part2-image/Juicy/kill/9-4.png" alt="19">
+          <p>봇이 처음 이름을 물어본 것은 지칭을 위해 물어보는 것입니다. 여기서 addUser() 메서드를 통해 유저를 저장합니다.</p>
+          <p>이름을 인수로 입력하면 생성된 값을 토큰으로 사용하고 입력한 데이터를 이름으로 사용합니다.</p>
+          <p>따라서 만약 <strong>admin"); process=null; users.addUser("1337", "test"</strong> 라고 말을 적어 보내면 챗봇은</p>
+          <p>admin 토큰, process=null; 로 처리하고, test 유저까지 저장됩니다. 그렇게 시스템을 꼬이게 만들고 process 까지 null로 만들면</p>
+          <img src="part2-image/Juicy/kill/9-5.png" alt="20">
+          <p>이렇게 말하면서 시스템은 비활성화 됩니다.</p>
+          `
+      },
       
     };
   </script>
