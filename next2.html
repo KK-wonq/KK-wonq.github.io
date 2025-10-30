@@ -54,6 +54,14 @@
             <img src="part2-image/wazuh,go,pmm/nail.png" alt="wazuh" class="project-card-thumbnail" loading="lazy">
             <div class="project-card-content"><p>보안 로그 분석</p></div>
           </div>
+          <div class="project-card" data-project-id="ctf" tabindex="0">
+            <img src="part2-image/ctf/ctf-thumbnail.png" alt="CTF 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>CTF 풀이 과정</p></div>
+          </div>
+          <div class="project-card" data-project-id="juice-shop" tabindex="0">
+            <img src="part2-image/juice-shop/juice-shop-thumbnail.png" alt="Juice-shop 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>OWASP Juice Shop</p></div>
+          </div>
         </div>
       </section>
     </main>
@@ -159,7 +167,61 @@
            { src: "part2-image/wazuh,go,pmm/go-1.png", caption: "터미널로 Goaccess 접속" },
            { src: "part2-image/wazuh,go,pmm/go-2.png", caption: "html파일로 apache2 로그 확인" }
          ]
-      }
+      },
+      
+      ctf: {
+        title: "CTF 풀이 과정 (문제이름)",
+        description: "Webhacking.kr 또는 특정 CTF 문제 풀이 과정입니다.",
+        // [중요] 'images' 대신 'htmlContent'를 사용합니다.
+        // 여기에 H3, p, img 태그를 자유롭게 넣어 블로그처럼 만듭니다.
+        htmlContent: ` 
+          <h3>1. 문제 분석</h3>
+          <p>문제 페이지에 접속하면 다음과 같은 화면이 나옵니다. 소스 코드를 분석해 보니...</p>
+          <img src="part2-image/ctf/ctf-step1.png" alt="문제 분석 스크린샷">
+          
+          <h3>2. 취약점 발견</h3>
+          <p>특정 입력값에서 SQL 인젝션 취약점이 발견되었습니다. ' OR '1'='1'-- 구문을 입력했을 때...</p>
+          <img src="part2-image/ctf/ctf-step2.png" alt="취약점 발견 스크린샷">
+
+          <h3>3. 플래그 획득</h3>
+          <p>최종적으로 페이로드를 완성하여 플래그를 획득했습니다.</p>
+          <pre><code>alert('pwned')</code></pre>
+        `
+      },
+
+      // 2. Juice-shop (하위 프로젝트 컨테이너)
+      'juice-shop': {
+        title: "OWASP Juice Shop 풀이",
+        description: "난이도별 Juice Shop 문제 풀이 과정입니다. 카드를 클릭하세요.",
+        // 'dns' 프로젝트처럼 subProjects를 가집니다.
+        subProjects: {
+          'sub-juice-xss': { title: "XSS (Cross-Site Scripting)", thumbnail: "part2-image/juice-shop/xss-thumb.png" },
+          'sub-juice-sqli': { title: "SQL Injection", thumbnail: "part2-image/juice-shop/sqli-thumb.png" }
+          // ... 여기에 다른 Juice-shop 챌린지를 추가 ...
+        }
+      },
+
+      // 3. Juice-shop 하위 프로젝트 (이것도 블로그 형식)
+      'sub-juice-xss': {
+        title: "XSS (Cross-Site Scripting) 챌린지",
+        description: "XSS 관련 챌린지 풀이 상세 과정입니다.",
+        // 여기도 'htmlContent'를 사용합니다.
+        htmlContent: `
+          <h3>Level 1: Basic XSS</h3>
+          <p>가장 기본적인 XSS 챌린지입니다. 검색 창에 스크립트 구문을 입력합니다.</p>
+          <pre><code>&lt;script&gt;alert('xss')&lt;/script&gt;</code></pre>
+          <img src="part2-image/juice-shop/xss-step1.png" alt="XSS 1단계">
+        `
+      },
+      'sub-juice-sqli': {
+        title: "SQL Injection 챌린지",
+        description: "SQLi 관련 챌린지 풀이 상세 과정입니다.",
+        htmlContent: `
+          <h3>Level 1: Login Admin</h3>
+          <p>로그인 창에서 ' OR '1'='1' 구문을 사용하여 관리자로 로그인합니다.</p>
+          <img src="part2-image/juice-shop/sqli-step1.png" alt="SQLi 1단계">
+        `
+      }
     };
     
     // --- 이하 자바스크립트 로직은 수정할 필요가 없습니다 ---
@@ -177,44 +239,62 @@
     const navigationStack = [];
 
     function renderModalContent(projectId) {
-      const project = portfolioData[projectId];
-      if (!project) return;
+      const project = portfolioData[projectId];
+      if (!project) return;
 
-      if (navigationStack[navigationStack.length - 1] !== projectId) {
-          navigationStack.push(projectId);
-      }
-      
-      modalTitle.textContent = project.title;
-      modalDescription.textContent = project.description;
-      modalContent.innerHTML = '';
+      if (navigationStack[navigationStack.length - 1] !== projectId) {
+          navigationStack.push(projectId);
+      }
+      
+      modalTitle.textContent = project.title;
+      modalDescription.textContent = project.description;
+      modalContent.innerHTML = ''; // 내용을 비웁니다.
 
-      const grid = document.createElement('div');
-      grid.className = 'detail-grid';
+      // [추가] 'htmlContent' (블로그 형식)이 있는지 확인합니다.
+      if (project.htmlContent) {
+        // "블로그" 경로
+        const blogContainer = document.createElement('div');
+        blogContainer.className = 'blog-content'; // CSS 스타일을 위한 클래스
+        blogContainer.innerHTML = project.htmlContent;
+        modalContent.appendChild(blogContainer);
 
-      if (project.images) {
-          project.images.forEach(image => {
-              const item = document.createElement('div');
-              item.className = 'detail-item';
-              item.innerHTML = `<img src="${image.src}" alt="${image.caption}" loading="lazy"><p>${image.caption}</p>`;
-              item.addEventListener('click', () => openLightbox(image.src));
-              grid.appendChild(item);
-          });
-      } 
-      
-      if (project.subProjects) {
-          for (const key in project.subProjects) {
-              const sub = project.subProjects[key];
-              const card = document.createElement('div');
-              card.className = 'project-card';
-              card.innerHTML = `<img src="${sub.thumbnail}" alt="${sub.title}" class="project-card-thumbnail"><div class="project-card-content"><p>${sub.title}</p></div>`;
-              card.addEventListener('click', () => renderModalContent(key));
-              grid.appendChild(card);
-          }
-      }
-      
-      modalContent.appendChild(grid);
-      modalBackBtn.style.display = navigationStack.length > 1 ? 'block' : 'none';
-    }
+        // [추가] 블로그 내용 안의 이미지에도 라이트박스를 적용합니다.
+        blogContainer.querySelectorAll('img').forEach(img => {
+          img.addEventListener('click', () => openLightbox(img.src));
+          // img.style.cursor = 'pointer'; // 클릭 가능하게 보이도록 (선택 사항)
+        });
+
+      } else if (project.images || project.subProjects) {
+        // "기존 그리드" 경로
+        const grid = document.createElement('div');
+        grid.className = 'detail-grid';
+
+        if (project.images) {
+            project.images.forEach(image => {
+                const item = document.createElement('div');
+                item.className = 'detail-item';
+                item.innerHTML = `<img src="${image.src}" alt="${image.caption}" loading="lazy"><p>${image.caption}</p>`;
+                item.addEventListener('click', () => openLightbox(image.src));
+                grid.appendChild(item);
+            });
+        } 
+        
+        if (project.subProjects) {
+            for (const key in project.subProjects) {
+                const sub = project.subProjects[key];
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `<img src="${sub.thumbnail}" alt="${sub.title}" class="project-card-thumbnail"><div class="project-card-content"><p>${sub.title}</p></div>`;
+                card.addEventListener('click', () => renderModalContent(key));
+                grid.appendChild(card);
+            }
+        }
+        
+        modalContent.appendChild(grid);
+      }
+      
+      modalBackBtn.style.display = navigationStack.length > 1 ? 'block' : 'none';
+    }
 
     function openModal(projectId) {
       navigationStack.length = 0; 
