@@ -62,6 +62,10 @@
             <img src="part2-image/Juicy/juicy-nail.png" alt="Juice-shop 썸네일" class="project-card-thumbnail" loading="lazy">
             <div class="project-card-content"><p>OWASP Juice Shop</p></div>
           </div>
+          <div class="project-card" data-project-id="flare" tabindex="0">
+            <img src="part2-image/flare-vm/flare_nail.png" alt="flare 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>Flare-VM 악성코드분석</p></div>
+          </div>
         </div>
       </section>
     </main>
@@ -241,6 +245,69 @@
           'using': { title: "Using Components with Known Vulnerabilities", thumbnail: "part2-image/Juicy/kill/9-1.png" },          
         }
       },
+      'flare': {
+        title: "악성 코드 분석 보고서",
+        description: "악성코드 Mimikatz-mimilib.dll 분석",
+        htmlContent: `
+          <h3>1. 사용한 샘플 악성코드에 대하여</h3>
+          <p>보안 지원 공급자(SSP)로 위장하여 시스템에 등록되는 것이 목적인 악성 코드입니다.</p>
+          <p>SSP는 윈도우 로그인을 처리할 때 LSA라는 프로세스를 사용하는데, 이 LSA에 연결되어 인증작업을 돕는 합법적인 DLL입니다.</p>
+          <p>mimilib.dll 이 등록되면 이후 해당 시스템에서 로그인을 시도하는 모든 사용자의 비밀번호가 평문 그대로 이 DLL에 의해 가로채집니다. 비밀번호를 mimisa.log(예시) 같은 파일에 저장합니다.</p>
+
+          <p></p>
+          <br>
+
+          <h3>2. PEsutido  탐색 결과</h3>
+          <img src="part2-image/flare-vm/1.png" alt="1">
+          <p>SpLsaModeInitialize 함수로 mimilib.dll 을 SSP로 등록합니다. LSA가 시작될 때 이 함수를 호출하며, 이때부터 mimilib.dll 은 시스템에 로그인하는 모든 계정의 암호를 가로챌 준비를 하는 겁니다.</p>
+          <p>PasswordChangeNotify / NPLogonNotify 함수는 이름 그대로 <strong>비밀번호 변경</strong> 또는 <strong>네트워크 로그온</strong>이벤트가 발생할 때 마다 Windos가 이 함수들을 호출해줍니다. Mimikatz는 이 알림을 받아서 변경된 새 비밀번호, 로그온 정보를 즉시 훔치게 되는 겁니다.</p>
+          <p>DnsPluginInitialize / DncpNewPktHook 함수는 LSA뿐만 아니라 DNS서버나 DHCP 서버 서비스에도 플러그인으로 작동할 수 있음을 의미합니다. 네트워크 요청이나 IP주소 할당 과정에도 개입할 수 있습니다.</p>
+
+          <p></p>
+          <br>
+
+          <h3>3. IDA로 SpLsaModeInitialize 추적</h3>
+          <img src="part2-image/flare-vm/2.png" alt=2>
+          <p>먼저 SSP로 등록하는 함수가 export 되는 것을 볼 수 있습니다.</p>
+          <img src="part2-image/flare-vm/3.png" alt=3>
+          <p>보안 설정 쿠키를 가져오는 것을 확인할 수 있습니다. 여기로 들어가보겠습니다.</p>
+          <img src="part2-image/flare-vm/4.png" alt=4>
+          <p>각종 System 파일의 id 등을 가져옴.</p>
+
+          <p></p>
+          <br>
+
+          <h3>4. 비밀번호를 가로채서 log 파일에 숨겨적는 함수를 추적함.</h3>
+          <img src="part2-image/flare-vm/5.png" alt=5>
+          <p>GetProcAddress 로 몰래 주소를 찾아와서 사용하는 악성 함수입니다. 이 위에 있는 함수를 찾아보면,</p>
+          <img src="part2-image/flare-vm/6.png" alt=6>
+          <p>LoadLibraryW 라는 함수를 호출하여 비밀번호가 어디에 있는지 찾아가는 중임을 알 수 있습니다.</p>
+          <img src="part2-image/flare-vm/7.png" alt=7>
+          <p>해당 함수를 컴파일 해본 결과, 윈도우 자격증명과 고급 API가 들어있는 핵심 DLL 두개를 메모리로 불러옵니다. 그 후 GetProcAddress(v7, "CredIsProctectedW")... advapi32.dll 라이브러리 안에서 암호화되었는지 확인하고 암호화를 해제하는 함수의 실제 주소를 찾아갑니다.</p>
+          <p>그 다음 자격 증명 관리자에서 암호화 후 CredProtectW 에 저장합니다.</p>
+
+          <p></p>
+          <br>
+
+          <h3>5. 저장한 암호화 방법 및 자격 증명 암호를 어디에 저장하는지 추적</h3>
+          <img src="part2-image/flare-vm/8.png" alt=8>
+          <p>이전 단계에서 찾아온 함수들로 암호화된 비밀번호를 log 파일에다가 저장하는 알고리즘을 찾았습니다. 만약 v18 이라는 자격증명이 암호화되지 않았다면 혹은 암호해제에 성공했다면 log 파일을 쓰기모드로 열어서 방금 연 파일에 sub_180004V30 함수를 엽니다.</p>
+          <p><b>Sub-180004B30 함수</b> 를 열어보면</p>
+          <img src="part2-image/flare-vm/9.png" alt=9>
+          <p>Vfwprintf 로 log 파일에 글씨를 씁니다. Stream 은 아까의 log 파일을 불러오는 것이고, a2,va 는 훔친 비밀번호 암호화 해제 후 평문이 들어가있는 데이터를 뜻합니다. 그것을 log 파일에 작성하고 fflush 명령어로 저장하라는 뜻입니다.</p>
+
+          <p></p>
+          <br>
+
+          <h3>6. 짧은 동적 분석</h3>
+          <img src="part2-image/flare-vm/10.png" alt=10>
+          <img src="part2-image/flare-vm/11.png" alt=11>
+          <p>cmd 로 rundll32.exe 를 통해 실행시킨뒤 process Monitor 에서 rundll32.exe 캡처해보았습니다.</p>
+          <p>필터 로그라는게 새로 생긴 것을 알 수 있습니다. 비밀번호를 변경하는 활동은 하지 않았기 때문에 로그에 무언가 적히지는 않았습니다.</p>
+
+          <br>
+        `
+      },
 
       // 3. Juice-shop 하위 프로젝트 (이것도 블로그 형식)
       'injection': {
