@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>포트폴리오 | 이혜원 (Reimagined)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="splash">
+    <h1>SECURITY</h1>
+  </div>
+  
+  <div class="container">
+    <header>
+      <div class="profile">
+        <div class="profile-avatar" aria-hidden="true">LH</div>
+        <div class="profile-info">
+          <h1>이혜원</h1>
+          <p>보안 관련 포트폴리오 — 네트워크 · 서버 · 탐지 시스템</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="next.html" class="btn">다음 페이지 →</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="intro">
+        <h2>안녕하세요! 👋</h2>
+        <p>
+          저는 이혜원입니다.
+          이 페이지는 저의 보안 기술 역량을 담은 포트폴리오입니다.
+          가상 네트워크 환경 구축부터 침입 탐지 시스템(HIDS/NIDS), 모니터링 시스템 구현 등 다양한 프로젝트를 확인하실 수 있습니다.
+          각 프로젝트 카드를 클릭하면 상세한 구축 과정과 결과 이미지를 볼 수 있습니다.
+        </p>
+      </section>
+
+      <section id="project-list">
+        <h2 class="section-title">PROJECTS</h2>
+        <div class="projects-grid">
+          <div class="project-card" data-project-id="gns3" tabindex="0">
+            <img src="port_images/default_GNS3_Topol.PNG" alt="GNS3 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>GNS3 네트워크 토폴로지</p></div>
+          </div>
+
+          <div class="project-card" data-project-id="hids" tabindex="0">
+            <img src="port_images/OSSEC(HIDS)_ipaddr.PNG" alt="HIDS 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>HIDS - OSSEC</p></div>
+          </div>
+          
+          <div class="project-card" data-project-id="zabbix" tabindex="0">
+            <img src="port_images/Rocky_Zabbix_server.PNG" alt="Zabbix 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>Zabbix 모니터링 시스템</p></div>
+          </div>
+
+          <div class="project-card" data-project-id="pfsense" tabindex="0">
+            <img src="port_images/pfsense_remote_Access.PNG" alt="pfsense 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>pfsense 방화벽 및 OpenVPN</p></div>
+          </div>
+          
+          <div class="project-card" data-project-id="snort" tabindex="0">
+            <img src="port_images/snort_rules_re_re.PNG" alt="Snort 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>NIDS - Snort</p></div>
+          </div>
+
+          <div class="project-card" data-project-id="suricata" tabindex="0">
+            <img src="port_images/suricata_rules_re_re.PNG" alt="Suricata 썸네일" class="project-card-thumbnail" loading="lazy">
+            <div class="project-card-content"><p>NIDS - Suricata</p></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="modal-back-btn" id="modal-back" style="display: none;">← 뒤로가기</button>
+        <button class="modal-close-btn" id="modal-close">✖</button>
+      </div>
+      <h2 id="project-detail-title"></h2>
+      <p id="project-detail-description"></p>
+      <div id="project-detail-content">
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox">
+    <img id="lightbox-image" src="" alt="확대 이미지">
+  </div>
+
+  <script>
+      const portfolioData = {
+        gns3: {
+          title: "GNS3 네트워크 토폴로지",
+          description: "GNS3를 사용하여 가상 네트워크 환경을 구축하고, 방화벽(ASAv) 및 라우터(HSRP) 설정을 통해 네트워크 통신을 제어하고 이중화를 구성한 프로젝트입니다. 각 장비 간의 통신 규칙과 접근 제어를 테스트했습니다.",
+          images: [
+            { src: "port_images/default_GNS3_Topol.PNG", caption: "기본 GNS3 토폴로지" },
+            { src: "port_images/ASAv_rules.PNG", caption: "ASAv 방화벽 정책 모음" },
+            { src: "port_images/FireFox3_to_inside_http.PNG", caption: "내부망(inside)으로의 HTTP 접속 허용" },
+            { src: "port_images/FireFox3_to_inside_telnet.PNG", caption: "내부망(inside)으로의 Telnet 접속 허용" },
+            { src: "port_images/webterm2_to_dmz_telnet.PNG", caption: "DMZ 구간으로의 Telnet 접속" },
+            { src: "port_images/PC1_to_webterm1_ping.PNG", caption: "외부망(outside)에서 DMZ로의 ICMP 통신" },
+            { src: "port_images/webterm1_to_R1_http.PNG", caption: "Webterm1에서 R1으로의 HTTP 접속" },
+            { src: "port_images/Webterm1_to_R1_telnet.PNG", caption: "Webterm1에서 R1으로의 Telnet 접속" },
+            { src: "port_images/Webterm2_to_PC1_ping.PNG", caption: "Webterm2에서 PC1으로의 ICMP 통신" },
+            { src: "port_images/R3_Standby.PNG", caption: "HSRP 구축 - R3 Standby 상태" },
+            { src: "port_images/R4_Active.PNG", caption: "HSRP 구축 - R4 Active 상태" }
+          ]
+        },
+        hids: {
+          title: "HIDS - OSSEC",
+          description: "호스트 기반 침입 탐지 시스템(HIDS)인 OSSEC 서버를 구축하고, Windows 및 Rocky Linux 에이전트를 연동하여 시스템 로그, 파일 무결성 등을 중앙에서 모니터링하는 환경을 구성했습니다.",
+          images: [
+            { src: "port_images/ossec_server_ubuntu_linkagent.PNG", caption: "OSSEC 서버에 Windows, Rocky 에이전트 연결" },
+            { src: "port_images/Window10-Ossec.PNG", caption: "Windows 10 클라이언트에 설치된 OSSEC 에이전트" }
+          ]
+        },
+        zabbix: {
+          title: "Zabbix 모니터링 시스템",
+          description: "Rocky Linux에 Zabbix 서버를 설치하여 통합 모니터링 시스템을 구축했습니다. Zabbix 에이전트를 통해 Windows, Linux 등 다양한 시스템의 CPU, 메모리, 네트워크 트래픽과 같은 자원 현황을 실시간으로 감시합니다.",
+          images: [
+            { src: "port_images/Rocky_Zabbix_server.PNG", caption: "Rocky Linux에 구축된 Zabbix 서버 대시보드" },
+            { src: "port_images/zabbix_link.PNG", caption: "Zabbix 서버에 연결된 호스트(에이전트) 목록" }
+          ]
+        },
+        pfsense: {
+          title: "pfsense 방화벽 및 OpenVPN",
+          description: "오픈소스 방화벽 솔루션인 pfsense를 사용하여 네트워크 보안을 강화하고, OpenVPN 서버를 구축하여 외부에서도 안전하게 내부 네트워크에 접속할 수 있는 원격 접근(Remote Access) 환경을 구현했습니다.",
+          images: [
+            { src: "port_images/pfsense_remote_Access.PNG", caption: "pfsense를 이용한 OpenVPN 원격 접속 구축" }
+          ]
+        },
+        snort: {
+          title: "NIDS - Snort",
+          description: "네트워크 기반 침입 탐지 시스템(NIDS)인 Snort를 설치하고, 사용자 정의 탐지 규칙(Rule)을 작성하여 다양한 네트워크 공격 트래픽을 탐지하는 실습을 진행했습니다. HTTP, ICMP 트래픽부터 DDoS, 포트 스캐닝 공격까지 탐지 규칙을 적용했습니다.",
+          images: [
+            { src: "port_images/snort_rules_re_re.PNG", caption: "Ubuntu에 구축한 Snort 및 사용자 정의 규칙" },
+            { src: "port_images/snortRule_1.PNG", caption: "규칙 1: HTTP, ICMP 트래픽 탐지" },
+            { src: "port_images/snortRule_2.PNG", caption: "규칙 2: ICMP(Ping) 트래픽 탐지" },
+            { src: "port_images/SnortRule_4.PNG", caption: "규칙 3: DDoS 공격 탐지" },
+            { src: "port_images/SnortRule_5_Kali.PNG", caption: "규칙 4: SYN 포트 스캐닝 탐지" },
+            { src: "port_images/snort_rule4.PNG", caption: "규칙 5: URL 명령어 실행 시도 탐지" }
+          ]
+        },
+        suricata: {
+          title: "NIDS - Suricata",
+          description: "고성능 네트워크 침입 탐지 시스템(NIDS)인 Suricata를 구축하고, Snort와 유사한 문법의 규칙을 작성하여 실시간으로 악성 트래픽을 탐지하고 분석하는 환경을 구성했습니다. 멀티스레딩을 지원하여 대용량 트래픽 처리에 강점이 있습니다.",
+          images: [
+            { src: "port_images/suricata_rules_re_re.PNG", caption: "Rocky Linux에 구축한 Suricata 및 사용자 정의 규칙" },
+            { src: "port_images/suricataRule_1.PNG", caption: "규칙 1: HTTP, ICMP 트래픽 탐지" },
+            { src: "port_images/SuricataRules_5.PNG", caption: "규칙 2: SYN Flag 스캐닝 탐지" },
+            { src: "port_images/suricata_rule4.PNG", caption: "규칙 3: URL 명령어 실행 시도 탐지" }
+          ]
+        }
+      };
+    
+  </script>
+  <script src="main.js" defer></script>
+</body>
+</html>
