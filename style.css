@@ -589,3 +589,51 @@ html {
 .modal-body::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
+/* --- 이미지 화질 개선 (Anti-Blur Fix) --- */
+
+/* 1. 모달 안의 블로그형 콘텐츠 이미지 (htmlContent) */
+.blog-content img {
+  width: auto !important;       /* 억지로 100%로 늘리는 것 방지 */
+  max-width: 100% !important;   /* 화면보다 클 때만 화면에 맞춤 */
+  height: auto !important;      /* 비율 유지 */
+  display: block;               /* 가운데 정렬을 위해 블록 처리 */
+  margin: 20px auto !important; /* 위아래 여백 주고 가운데 정렬 */
+  
+  /* 그림자 및 둥근 모서리로 디자인 보강 */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5); 
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* 2. 모달 상단 슬라이더 이미지 (Carousel) */
+.carousel-slide img {
+  width: auto !important;
+  max-width: 100% !important;
+  height: 100%;                 /* 높이를 컨테이너에 맞춤 */
+  max-height: 500px;            /* 너무 커지지 않게 제한 */
+  object-fit: contain;          /* 이미지를 자르거나 늘리지 않고 비율 유지 */
+  margin: 0 auto;               /* 가운데 정렬 */
+  background-color: transparent; /* 배경 투명 */
+}
+
+/* 슬라이더 배경을 검은색이 아닌 투명/어두운 색으로 자연스럽게 */
+.carousel-slide {
+  background: radial-gradient(circle, rgba(30,41,59,0.5) 0%, rgba(2,6,23,1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3. 메인 화면 카드 썸네일 (Card Thumbnails) */
+.card-img {
+  /* 썸네일은 꽉 차 보이는 게 예쁘므로 cover 유지하되, 위치 조정 */
+  object-fit: cover; 
+  object-position: top center; /* 이미지의 윗부분을 중심으로 보여줌 (보통 제목이 위에 있으므로) */
+}
+
+/* 만약 썸네일도 잘리는 게 싫고 다 보고 싶다면 아래 주석을 해제해서 쓰세요 */
+/* .card-img {
+  object-fit: contain !important;
+  background-color: #020617;
+} 
+*/
