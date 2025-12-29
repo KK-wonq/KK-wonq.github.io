@@ -35,9 +35,6 @@ const portfolioData = [
     `,
     images: [
       { src: "port_images/pfsense_remote_Access.PNG", caption: "Pfsense 연결 중" },
-      { src: "port_images/pfsense_main_dashboard.PNG", caption: "Pfsense 메인 대시보드" },
-      { src: "port_images/pfsense_rule_1.PNG", caption: "방화벽 정책(Rule) 설정" },
-      { src: "port_images/pfsense_haproxy.PNG", caption: "HAProxy 로드밸런싱" }
     ]
   },
   {
@@ -71,9 +68,7 @@ const portfolioData = [
     images: [
       { src: "port_images/suricata_rules_re_re.PNG", caption: "Suricata 작성한 local.rules 파일" },
       { src: "port_images/SuricataRules_5.PNG", caption: "SYN Flag 스캐닝 탐지" },
-      { src: "port_images/suricata_rule4.PNG", caption: "URL 명령어 실행 시도 탐지" },
-      { src: "port_images/suricata_install.PNG", caption: "Suricata 설치 및 실행" },
-      { src: "port_images/suricata_test.PNG", caption: "fast.log 탐지 확인" }
+      { src: "port_images/suricata_rule4.PNG", caption: "URL 명령어 실행 시도 탐지" }
     ]
   },
   {
@@ -84,8 +79,7 @@ const portfolioData = [
     tech: ['OSSEC', 'HIDS', 'FIM'],
     images: [
       { src: "port_images/OSSEC(HIDS)_ipaddr.PNG", caption: "OSSEC 서버 설정" },
-      { src: "port_images/Window10-Ossec.PNG", caption: "윈도우와 연결" },
-      { src: "port_images/OSSEC(HIDS)_manage.PNG", caption: "에이전트 키 관리" }
+      { src: "port_images/Window10-Ossec.PNG", caption: "윈도우와 연결" }
     ]
   },
   {
@@ -96,8 +90,7 @@ const portfolioData = [
     tech: ['Zabbix', 'NMS', 'SNMP'],
     images: [
       { src: "port_images/Rocky_Zabbix_server.PNG", caption: "Zabbix 대시보드" },
-      { src: "port_images/zabbix_link.PNG", caption: "에이전트 연결" },
-      { src: "port_images/zabbix_graph.PNG", caption: "트래픽 그래프 분석" }
+      { src: "port_images/zabbix_link.PNG", caption: "에이전트 연결" }
     ]
   },
 
@@ -167,8 +160,7 @@ const portfolioData = [
     desc: 'Windows-Linux 간 파일 공유 및 사용자 권한(ACL) 설정',
     tech: ['Samba', 'File Server', 'ACL'],
     images: [
-      { src: "port_images/images-part/Samba,nfs/sambaserver.png", caption: "Samba 설정 후 공유 폴더 접근" },
-      { src: "port_images/images-part/Samba,nfs/samba-set.png", caption: "Samba 설정 (smb.conf)" }
+      { src: "port_images/images-part/Samba,nfs/sambaserver.png", caption: "Samba 설정 후 공유 폴더 접근" }
     ]
   },
   {
@@ -190,8 +182,8 @@ const portfolioData = [
     tech: ['Linux', 'Hardening', 'SSH'],
     images: [
       { src: "port_images/images-part/Linux/linux4.PNG", caption: "SetUID Bit 를 이용한 권한 상승 실습" },
-      { src: "port_images/images-part/Linux/linux3.png", caption: "로그인 성공/실패 기록 확인1" },
-      { src: "port_images/images-part/Linux/linux3-2.png", caption: "로그인 성공/실패 기록 확인2" }
+      { src: "port_images/images-part/Linux/linux-3.png", caption: "로그인 성공/실패 기록 확인1" },
+      { src: "port_images/images-part/Linux/linux3-2.PNG", caption: "로그인 성공/실패 기록 확인2" }
     ]
   },
   {
@@ -242,7 +234,7 @@ const portfolioData = [
     images: [
       { src: "part2-image/wazuh,go,pmm/nail.png", caption: "통합 로그 분석" },
       { src: "part2-image/wazuh,go,pmm/pmm.png", caption: "PMM 에이전트 등록 연결" },
-      { src: "port_images/images-part/wazuh-nail.PNG", caption: "Wazuh" },
+      { src: "port_images/images-part/wazuh-nail.png", caption: "Wazuh" },
       { src: "part2-image/wazuh,go,pmm/wazuh-1.png", caption: "Wazuh 이벤트 대시보드" },
       { src: "part2-image/wazuh,go,pmm/wazuh-2.png", caption: "Wazuh 에이전트 연결" },
       { src: "part2-image/wazuh,go,pmm/go-nail.png", caption: "WAF(GoAccess)" },
