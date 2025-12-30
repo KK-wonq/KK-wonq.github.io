@@ -32,252 +32,169 @@
   <section id="home" class="hero-section">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="badge">Security Researcher & Analyst</div>
+      <span class="badge">Security Analyst & Engineer</span>
       <h1>
-        보안의 <span class="text-gradient">깊이</span>를 탐구하는<br>
-        <span class="highlight">이혜원</span>입니다.
+        보안 전문가<br>
+        <span class="text-gradient">Security Specialist</span>
       </h1>
       <p>
-        네트워크 구축부터 취약점 분석, 모의해킹까지.<br>
-        실전과 같은 환경에서 끊임없이 연구하고 성장합니다.
+        안녕하세요, 보안 엔지니어를 꿈꾸는 이혜원입니다.<br>
+        네트워크 구축부터 모의해킹, 보안 관제까지 폭넓은 경험을 쌓고 있습니다.
       </p>
       <div class="hero-stats">
         <div class="stat-item">
-          <span class="stat-num">10+</span>
-          <span class="stat-label">Projects</span>
+          <span class="stat-num" id="count-all">0</span>
+          <span class="stat-label">Total Projects</span>
         </div>
         <div class="stat-item">
-          <span class="stat-num">Analyzing</span>
-          <span class="stat-label">Threats</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">CTF</span>
-          <span class="stat-label">Solver</span>
+          <span class="stat-num">4</span>
+          <span class="stat-label">Phases</span>
         </div>
       </div>
-      <a href="#projects" class="btn-main">프로젝트 보기 <i class="ph-bold ph-arrow-down"></i></a>
+      <a href="#projects" class="btn-main">View Projects <i class="ph-bold ph-arrow-right"></i></a>
     </div>
   </section>
 
   <section id="projects" class="section">
     <div class="container">
-      <h2 class="section-title">PROJECTS MAP <span class="dot">.</span></h2>
-      <p class="section-desc">GNS3 토폴로지를 기반으로 확장되는 3단계 보안 구축 및 분석 과정입니다.</p>
-      
+      <h2 class="section-title">Projects<span class="dot">.</span></h2>
+      <p class="section-desc">
+        기초 네트워크 설계부터 심화 보안 관제 및 모의해킹까지,<br>
+        단계별로 성장해온 저의 프로젝트 기록입니다.
+      </p>
+
       <div class="category-tabs">
         <button class="tab-btn active" data-category="all">
           <i class="ph-bold ph-squares-four"></i>
           <span>All</span>
-          <span class="count-badge" id="count-all">19</span>
         </button>
         <button class="tab-btn" data-category="phase1">
-          <i class="ph-bold ph-number-circle-one"></i>
-          <span>Phase 1 : Foundation</span>
+          <i class="ph-bold ph-tree-structure"></i>
+          <span>Phase 1. Foundation</span>
           <span class="count-badge" id="count-phase1">0</span>
         </button>
         <button class="tab-btn" data-category="phase2">
-          <i class="ph-bold ph-number-circle-two"></i>
-          <span>Phase 2 : Integration</span>
+          <i class="ph-bold ph-circles-three-plus"></i>
+          <span>Phase 2. Integration</span>
           <span class="count-badge" id="count-phase2">0</span>
         </button>
         <button class="tab-btn" data-category="phase3">
-          <i class="ph-bold ph-number-circle-three"></i>
-          <span>Phase 3 : Analysis</span>
+          <i class="ph-bold ph-skull"></i>
+          <span>Phase 3. Analysis</span>
           <span class="count-badge" id="count-phase3">0</span>
+        </button>
+        <button class="tab-btn" data-category="phase4">
+          <i class="ph-bold ph-users-three"></i>
+          <span>Phase 4. Team Project</span>
+          <span class="count-badge" id="count-phase4">0</span>
         </button>
       </div>
 
-      <div class="project-grid" id="project-grid"></div>
+      <div id="project-grid" class="project-grid"></div>
+    </div>
   </section>
 
   <section id="profile" class="section profile-section">
     <div class="container">
-      <h2 class="section-title">PROFILE <span class="dot">.</span></h2>
-      <p class="section-desc">보안 전문가로서 갖춰야 할 핵심 역량과 이력입니다.</p>
+      <h2 class="section-title">Profile<span class="dot">.</span></h2>
+      <p class="section-desc">Security Engineer & Analyst</p>
 
-      <div class="profile-grid">
-        <div class="profile-card">
-          <div class="profile-header">
-            <i class="ph-fill ph-code profile-icon cyan"></i>
-            <h3>Skills</h3>
+      <div class="profile-wrapper">
+        <div class="profile-card personal-info">
+          <div class="info-header">
+            <h3>이혜원</h3>
+            <p class="job-roles">보안관제 | 모의해킹 | 보안엔지니어링</p>
           </div>
-          <div class="skill-list">
-            <div class="skill-item">
-              <div class="skill-info"><span>SIEM 운영</span><span>90%</span></div>
-              <div class="progress-bar"><div class="progress-fill cyan" style="width: 90%"></div></div>
+          <div class="info-grid">
+            <div class="info-item">
+              <i class="ph-bold ph-student"></i>
+              <span>대구대학교 컴퓨터소프트웨어전공<br><small>(2022.03 ~ 2026.02 졸업예정)</small></span>
             </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>로그 분석 (Wazuh/ELK)</span><span>88%</span></div>
-              <div class="progress-bar"><div class="progress-fill purple" style="width: 88%"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>침해 사고 대응</span><span>85%</span></div>
-              <div class="progress-bar"><div class="progress-fill pink" style="width: 85%"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>취약점 분석</span><span>85%</span></div>
-              <div class="progress-bar"><div class="progress-fill blue" style="width: 85%"></div></div>
+            <div class="info-item">
+              <i class="ph-bold ph-envelope-simple"></i>
+              <a href="mailto:email@example.com">three78945@naver.com</a> </div>
+            <div class="info-item">
+              <i class="ph-bold ph-phone"></i>
+              <span>010-8672-1958</span> </div>
+            <div class="info-item links">
+              <a href="https://github.com/kk-wonq" target="_blank" class="icon-link"><i class="ph-bold ph-github-logo"></i> GitHub</a>
+              <a href="https://notion.so/wonq" target="_blank" class="icon-link"><i class="ph-bold ph-notebook"></i> Notion</a>
             </div>
           </div>
         </div>
 
-        <div class="profile-column">
-          <div class="profile-card mb-card">
-            <div class="profile-header">
-              <i class="ph-fill ph-certificate profile-icon pink"></i>
-              <h3>Certifications</h3>
-            </div>
-            <div class="cert-list">
-              <div class="cert-item">
-                <div class="cert-icon-box"><i class="ph-bold ph-shield-check"></i></div>
-                <div><div class="cert-name">정보보안기사</div><div class="cert-org">한국산업인력공단</div></div>
-                <div class="cert-year">2023</div>
-              </div>
-              <div class="cert-item">
-                <div class="cert-icon-box"><i class="ph-bold ph-lock-key"></i></div>
-                <div><div class="cert-name">네트워크관리사 2급</div><div class="cert-org">ICQA</div></div>
-                <div class="cert-year">2022</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="profile-card">
-            <div class="profile-header">
-              <i class="ph-fill ph-graduation-cap profile-icon purple"></i>
-              <h3>Education</h3>
-            </div>
-            <div class="edu-list">
-              <div class="edu-item">
-                <div class="edu-degree">정보보안학 전공</div>
-                <div class="edu-school">XX대학교</div>
-                <div class="edu-period">2020 - 2024 (졸업예정)</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="resume" class="section resume-section">
-    <div class="container">
-      <div class="section-header-row">
-        <div>
-          <h2 class="section-title">RESUME <span class="dot">.</span></h2>
-          <p class="section-desc">지속적인 성장을 추구하는 보안 전문가의 여정입니다.</p>
-        </div>
-        <a href="#" onclick="window.print(); return false;" class="btn-download">
-          <i class="ph-bold ph-download-simple"></i> PDF 다운로드
-        </a>
-      </div>
-
-      <div class="resume-paper">
-        <div class="resume-header">
-          <div class="resume-title-box">
-            <h2>이혜원</h2>
-            <span class="resume-role">Security Researcher & Analyst</span>
-          </div>
-          <div class="resume-contact">
-            <div class="contact-item"><i class="ph-fill ph-envelope"></i> email@example.com</div>
-            <div class="contact-item"><i class="ph-fill ph-github-logo"></i> github.com/username</div>
-            <div class="contact-item"><i class="ph-fill ph-phone"></i> 010-1234-5678</div>
-          </div>
-        </div>
-
-        <div class="resume-body">
+        <div class="profile-card skills-area">
+          <h3><i class="ph-bold ph-lightning"></i> Technical Skills</h3>
           
-          <div class="resume-main">
-            <h3 class="resume-sub-title"><i class="ph-bold ph-briefcase"></i> Experience</h3>
-            
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2024.01 - 현재</div>
-                <h4 class="timeline-title">보안 관제 및 침해사고 대응</h4>
-                <div class="timeline-org">Security Operation Center</div>
-                <ul class="timeline-desc">
-                  <li>SIEM(Splunk, Wazuh) 기반 24/7 보안 이벤트 모니터링 및 로그 분석</li>
-                  <li>침해사고 발생 시 초동 조치 및 상세 분석 리포트 작성</li>
-                  <li>탐지 룰(Snort, YARA) 최적화를 통한 오탐률 30% 감소</li>
-                </ul>
-              </div>
-              
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2023.06 - 2023.12</div>
-                <h4 class="timeline-title">화이트해커 양성 과정 수료</h4>
-                <div class="timeline-org">K-Shield Jr. / BoB (예시)</div>
-                <ul class="timeline-desc">
-                  <li>웹/네트워크 취약점 진단 실습 및 모의해킹 프로젝트 수행</li>
-                  <li>악성코드 분석 및 리버싱 엔지니어링 기초 과정 수료</li>
-                </ul>
-              </div>
-            </div>
-
-            <h3 class="resume-sub-title mt-large"><i class="ph-bold ph-graduation-cap"></i> Education</h3>
-             <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2020.03 - 2024.02</div>
-                <h4 class="timeline-title">정보보안학과 학사 졸업</h4>
-                <div class="timeline-org">XX대학교</div>
-                <p class="timeline-text">네트워크 보안 및 시스템 보안 전공. 학점 4.0/4.5</p>
-              </div>
+          <div class="skill-category">
+            <span class="skill-label">Network Security</span>
+            <div class="skill-tags">
+              <span>GNS3</span><span>Cisco</span><span>Pfsense</span><span>Snort</span><span>Suricata</span><span>OpenVPN</span>
             </div>
           </div>
 
-          <div class="resume-side">
-            
-            <div class="side-group">
-              <h3 class="resume-sub-title small"><i class="ph-bold ph-code"></i> Technical Skills</h3>
-              <div class="skill-tags">
-                <span class="tag">Network Security</span>
-                <span class="tag">Web Hacking</span>
-                <span class="tag">Forensics</span>
-                <span class="tag">Linux/Unix</span>
-                <span class="tag">Python</span>
-                <span class="tag">Wireshark</span>
-                <span class="tag">Burp Suite</span>
-              </div>
+          <div class="skill-category">
+            <span class="skill-label">System & Server</span>
+            <div class="skill-tags">
+              <span>Linux (Rocky/Ubuntu)</span><span>Windows Server</span><span>Docker</span><span>Samba/NFS</span>
             </div>
+          </div>
 
-            <div class="side-group">
-              <h3 class="resume-sub-title small"><i class="ph-bold ph-medal"></i> Certificates</h3>
-              <ul class="simple-list">
-                <li>
-                  <span class="list-title">정보보안기사</span>
-                  <span class="list-date">2023.11</span>
-                </li>
-                <li>
-                  <span class="list-title">네트워크관리사 2급</span>
-                  <span class="list-date">2022.08</span>
-                </li>
-                <li>
-                  <span class="list-title">SQLD</span>
-                  <span class="list-date">2022.05</span>
-                </li>
-              </ul>
+          <div class="skill-category">
+            <span class="skill-label">Monitoring & Log</span>
+            <div class="skill-tags">
+              <span>Wazuh</span><span>OSSEC</span><span>Zabbix</span><span>Rsyslog</span><span>LogAnalyzer</span>
             </div>
+          </div>
 
-            <div class="side-group">
-              <h3 class="resume-sub-title small"><i class="ph-bold ph-translate"></i> Languages</h3>
-              <ul class="simple-list">
-                <li>
-                  <span class="list-title">Korean</span>
-                  <span class="list-desc">Native</span>
-                </li>
-                <li>
-                  <span class="list-title">English</span>
-                  <span class="list-desc">Professional Working</span>
-                </li>
-              </ul>
+          <div class="skill-category">
+            <span class="skill-label">Hacking & Analysis</span>
+            <div class="skill-tags">
+              <span>Metasploit</span><span>Burp Suite</span><span>SQLmap</span><span>Nmap</span><span>IDA Pro</span><span>x64dbg</span>
             </div>
+          </div>
+        </div>
 
+        <div class="profile-card cert-area">
+          <h3><i class="ph-bold ph-certificate"></i> Certifications</h3>
+          <div class="empty-state">
+            <i class="ph-duotone ph-pencil-simple-slash"></i>
+            <p>현재 취득 준비 중입니다.<br><span>(정보보안기사 / 네트워크관리사 등 준비 목표)</span></p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <section id="resume" class="section">
+    <div class="container">
+      <h2 class="section-title">Resume<span class="dot">.</span></h2>
+      <p class="section-desc">저의 이력서를 확인해 보세요.</p>
+
+      <div class="resume-viewer-frame">
+        <div class="resume-carousel-container">
+          <div class="resume-track" id="resume-track">
+            <div class="resume-page">
+              <img src="part3-image/resume1.jpg" alt="이력서 1페이지">
+              <img src="part3-image/resume2.jpg" alt="이력서 2페이지">
+              <img src="part3-image/resume3.jpg" alt="이력서 3페이지">
+            </div>
+            </div>
+          
+          <button class="resume-btn prev" id="resume-prev"><i class="ph-bold ph-caret-left"></i></button>
+          <button class="resume-btn next" id="resume-next"><i class="ph-bold ph-caret-right"></i></button>
+        </div>
+        
+        <div class="resume-actions">
+           <p id="resume-page-indicator">Page 1 / 1</p>
+           <a href="part3-image/resume(수정필요).pdf" download class="btn-download-resume">
+             <i class="ph-bold ph-download-simple"></i> PDF 다운로드
+           </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal-container">
       <button id="modal-close" class="modal-close-btn"><i class="ph-bold ph-x"></i></button>
@@ -307,7 +224,7 @@
   </div>
 
   <footer>
-    <p>© 2024 Hyewon Lee. Security Portfolio.</p>
+    <p>&copy; 2024 Lee Hye Won. All rights reserved.</p>
   </footer>
 
   <script src="main.js"></script>
