@@ -379,7 +379,194 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
     images: [
       { src: "part2-image/flare-vm/flare_nail.png", caption: "악성 코드 MimiKatz-mimilib.dll 분석" }
     ]
-  }
+  },
+  // ================= [ Phase 4 : Team Project (팀 프로젝트) ] =================
+  {
+    id: 'p4_ctf_web',
+    category: 'phase4',
+    title: 'CTF Team Project - Web Hacking',
+    desc: '팀 프로젝트: 스테가노그래피 분석 및 SQL Injection을 통한 관리자 계정 탈취 (Web Part)',
+    tech: ['SQLmap', 'Fuzzing', 'Gobuster', 'Blind Injection'],
+    // ★ 다운로드할 파일 목록 추가
+    
+    downloadDesc:'버튼을 클릭하여 CTF 전체 워크스루 보고서(PDF)파일과 가상머신 CTF OVA 파일을 다운받을 수 있습니다.',
+    downloads: [
+      { name: 'Full Walkthrough (PDF)', src: 'part3-image/ctf/팀_프로젝트_풀이과정(CTF).pdf' },
+      { name: 'Project VM (OVA)', src: 'https://drive.google.com/file/d/1qPtaBbjD_TA1BNAV04lhG9ebSwV3HZdq/view?usp=drive_link' }       // 실제 파일 경로로 수정 필요
+    ],
+    htmlContent: `
+      <h2>로그인 페이지 SQL Injection</h2>
+      <p>CTF를 제작하는 팀프로젝트에서 <code>로그인 페이지</code>에 취약점을 넣는 부분을 맡았습니다.</p>
+      
+      <p></p>
+      <br>
+        
+      <h3>1. 환경 분석</h3>
+      <p>먼저 로그인 페이지에 로그인을 하기 위해 회원가입을 진행합니다.</p>
+      <img src="part3-image/ctf/ctf-2.png" style="width:100%; border-radius:8px;" alt=10>
+      
+      <p>회원가입 후 들어가보면 admin만 접근가능한 업로드 장소로 가는 버튼이 있습니다.</p>
+      <img src="part3-image/ctf/ctf-3.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>디렉터리 바로 아래에 <code>gobuster</code>를 이용해서 추가적인 파일을 확인해봅니다.</p>
+      <img src="part3-image/ctf/ctf-4.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>가장 의심스러운 파일은 search.php 파일이라고 생각할 수 있습니다.</p>
+
+      <p></p>
+      <br>
+      
+      <h3>2. SQL Injection</h3>
+      <p>search.php 파일에 들어가보면 ERROR 라는 문구만 뜨는 것을 볼 수 있습니다. 하지만 반응을 한다는 것은 확인할 수 있습니다.</p>
+      <img src="part3-image/ctf/ctf-5.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>경로에 아무 파라미터나 집어넣어서 들어가봐도 오류는 뜨지 않았습니다.</p>
+      <img src="part3-image/ctf/ctf-6.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>퍼징으로 파라미터를 찾아보게 되면은, 굉장히 많은 파라미터값이 매칭되는 것을 볼 수 있습니다. 이것을 특정 조건을 붙여 제외시켜볼 수 있습니다.</p>
+      <img src="part3-image/ctf/ctf-7.png" style="width:100%; border-radius:8px;" alt=10>
+      <img src="part3-image/ctf/ctf-8.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>그렇게 되면 파라미터 값은 q로 나오게 되고, URI 에 넣어서 다시 들어가보면, 이번에는 다른 글자가 적히는 것을 확인할 수 있습니다.</p>
+      <img src="part3-image/ctf/ctf-11.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>힌트로 블라인드 인젝션이라는 것을 알 수 있습니다.</p>
+
+      <p></p>
+      <br>
+
+      <h3>3. SQLMAP</h3>
+      <p><code>SQL MAP</code>을 통해 데이터베이스를 알아보겠습니다.</p>
+      <img src="part3-image/ctf/ctf-12.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>데이터베이스 중 website 라는 데이터베이스를 발견했습니다. --dump 옵션을 추가하여 모든 데이터를 확인해볼 수 있습니다.</p>
+      <img src="part3-image/ctf/ctf-13.png" style="width:100%; border-radius:8px;" alt=10>
+      <p>이렇게 admin 계정의 패스워드를 찾을 수 있었습니다. 이걸로 로그인페이지에서 admin으로 로그인할 수 있습니다.</p>
+      <img src="part3-image/ctf/ctf-14.png" style="width:100%; border-radius:8px;" alt=10>
+      
+    `,
+    images: [
+      { src: "part3-image/ctf/ctf-1.png", caption: "CTF 첫 화면" },
+    ]
+  },
+  // ================= [ Phase 3 : Wargame (개인 연구) ] =================
+  {
+    id: 'p3_wargame_pw1234',
+    category: 'phase4',
+    title: 'Wargame: Password1234',
+    desc: '웹 해킹부터 루트 권한 획득까지: 단계별(Easy~Hard) 시스템 침투 실습 워크스루',
+    tech: ['Web Hacking', 'SQL Injection', 'Session Hijacking', 'Privilege Escalation'],
+    
+    downloadDesc: '아래 버튼을 클릭하여 전체 Wargame 워크스루 보고서(PDF)와 Wargame OVA 파일을 다운로드 받을 수 있습니다.',
+    downloads: [
+      { 
+        name: 'Wargame Walkthrough (PDF)', 
+        src: 'part3-image/wargame/password1234-wargame_워크스루.pdf' 
+      },
+      { 
+        name: 'Wargame VM (OVA)', 
+        src: 'https://drive.google.com/file/d/1bsjcZof9CqIn9axXwGMUNPnVSR1yyLIC/view?usp=drive_link' 
+      }
+    ],
+
+    htmlContent: `
+      <h3>제가 맡은 팀프로젝트 Wargame 문제의 풀이과정입니다.</h3>
+      <p>가상의 취약한 서버(Password1234)를 대상으로 정보 수집, 웹 취약점 공략, 쉘 획득, 그리고 권한 상승 등의 문제를 다루었습니다.</p>
+      
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #22d3ee; border-radius: 4px; padding: 20px; margin-top: 25px;">
+        <h4 style="color: #22d3ee; margin-top: 0; display:flex; justify-content:space-between;">
+          <span>1. SystemHacking - SSH 원격접속</span>
+          <span style="font-size:0.8em; opacity:0.7; border:1px solid #22d3ee; padding:2px 8px; border-radius:12px;">Level: Easy 2</span>
+        </h4>
+        <p><strong>목표:</strong> SSH 접속 후 플래그를 획득하기</p>
+        <p>먼저 주어진 SSH 원격접속 username 과 패스워드로 접속합니다.</p>
+        <img src="part3-image/wargame/s2-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="easy2">
+        <p>그 다음 sudo -l 명령어로 실행시킬 수 있는 파일이 있는지 확인합니다. 확인해보니 playssh2 라는 사용자의 권한으로 ssh 원격 접속 키파일인 id_rsa 파일을 cat 으로 볼 수 있습니다.</p>
+        <img src="part3-image/wargame/s2-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="easy2">
+        <p>playssh2 사용자의 권한으로 파일을 확인하여 원격접속 키내용을 복사해서 파일을 만듭니다.</p>
+        <img src="part3-image/wargame/s2-3.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="easy2">
+        <p>만든 파일로 옵션을 이용해 playssh2 사용자로 원격접속을 시도해봅니다.</p>
+        <p>하지만 원격접속을 시도해도 코멘트가 없다는 말과 함께 Connection closed 된 것을 확인할 수 있었습니다.</p>
+        <img src="part3-image/wargame/s2-4.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="easy2">
+        <p>뒤에 명령어를 추가하여 다시 원격접속을 시도하니, 이번에는 해당 명령어의 출력결과가 나오는 것을 확인할 수 있습니다.</p>
+        <img src="part3-image/wargame/s2-5.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="easy2">
+        <p>이대로 flag.txt 파일을 보는 명령어를 집어넣어 flag 값을 획득할 수 있었습니다.</p>
+        <img src="part3-image/wargame/s2-6.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="easy2">
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #a855f7; border-radius: 4px; padding: 20px; margin-top: 25px;">
+        <h4 style="color: #a855f7; margin-top: 0; display:flex; justify-content:space-between;">
+          <span>Step 2. WebHacking - Drag</span>
+          <span style="font-size:0.8em; opacity:0.7; border:1px solid #a855f7; padding:2px 8px; border-radius:12px;">Level: Noob 2</span>
+        </h4>
+        <p><strong>목표:</strong> Flag 획득</p>
+        <p>들어가자마자 보이는 화면의 글자에 드래그를 해볼 수 있습니다.</p>
+        <img src="part3-image/wargame/wn-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <p>곧바로 플래그 값을 획득할 수 있었습니다.</p>
+        <img src="part3-image/wargame/wn-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #f472b6; border-radius: 4px; padding: 20px; margin-top: 25px;">
+        <h4 style="color: #f472b6; margin-top: 0; display:flex; justify-content:space-between;">
+          <span>Step 3. WebHacking - SQLi</span>
+          <span style="font-size:0.8em; opacity:0.7; border:1px solid #f472b6; padding:2px 8px; border-radius:12px;">Level: Normal 2</span>
+        </h4>
+        <p><strong>목표:</strong> SQL injection 에 성공하고 플래그 값 획득</p>
+        <p>문제에 진입하면 검색창 화면이 나타납니다. 이 부분에 ' 라는 문자를 삽입하고 검색버튼을 누를 수 있습니다.</p>
+        <img src="part3-image/wargame/wnor-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="normal2">
+        <p>그렇게 되면 fatal 에러가 화면에 뜨게됩니다. 이것으로 injection 이 가능한 페이지라는 것을 확인할 수 있습니다.</p>
+        <img src="part3-image/wargame/wnor-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="normal2">
+        <p>검색창에 이번에는 참이 되는 구문(' or 1=1#)을 집어넣으니 담겨진 모든 내용이 뜨는 것을 확인할 수는 있지만, 플래그는 뜨지 않습니다.</p>
+        <img src="part3-image/wargame/wnor-3.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="normal2">
+        <p>UNION 구문을 이용해서 다른 칼럼에 있는 내용들을 모조리 긁어내볼 수 있습니다.</p>
+        <img src="part3-image/wargame/wnor-4.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="normal2">
+        <p>password 라는 컬럼을 검색하니 플래그가 적혀진 것을 확인할 수 있었습니다.</p>
+        <img src="part3-image/wargame/wnor-5.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="normal2">
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #fb923c; border-radius: 4px; padding: 20px; margin-top: 25px;">
+        <h4 style="color: #fb923c; margin-top: 0; display:flex; justify-content:space-between;">
+          <span>Step 4. WebHacking - Seesion Hijacking</span>
+          <span style="font-size:0.8em; opacity:0.7; border:1px solid #fb923c; padding:2px 8px; border-radius:12px;">Level: Hard 2</span>
+        </h4>
+        <p><strong>목표:</strong> 세션을 탈취하여 Admin으로 로그인하기</p>
+        <p>문제로 들어가게 되면 로그인 페이지가 나옵니다. 평범하게 회원가입 후 로그인을 하게 되면 mypage 창이 나옵니다..</p>
+        <img src="part3-image/wargame/wh-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+        <p>Gobuster 도구를 이용해 해당 경로 밑에 무엇이 더 있는지 확인해볼 수 있습니다.</p>
+        <img src="part3-image/wargame/wh-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+        <p>확인한 파일들 중, Bot.php 로 들어가게 되면, 짧은 글하나가 적혀있습니다.</p>
+        <img src="part3-image/wargame/wh-3.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+        <p>해당 php 의 페이지소스를 보면 <code>아마 봇은 쿠키 로그파일을 적고있을 것이다.</code> 라는 힌트가 적혀있는 것으로, 봇은 지속적으로 어떤 파일에 로그 파일을 적고있고, 그것이 여기 폴더에 텍스트 파일로 있다는 것을 알 수 있습니다.</p>
+        <img src="part3-image/wargame/wh-4.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+        <p>그 텍스트 파일이 cookie_log.txt 라는 이름으로 있다는 것을 확인했고, 그 파일의 내용을 확인해보면 sessionid 값이 있는 것을 확인할 수 있습니다.</p>
+        <img src="part3-image/wargame/wh-5.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+        <p>개발자 도구로 들어가 세션 아이디의 value 부분에 방금 복사한 id 값을 넣습니다.</p>
+        <img src="part3-image/wargame/wh-6.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+        <p>그런 다음 mypage 창으로 다시 이동하게되면, admin 으로 로그인하면서 플래그값을 획득하게 됩니다.</p>
+        <img src="part3-image/wargame/wh-7.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #a855f7; border-radius: 4px; padding: 20px; margin-top: 25px;">
+        <h4 style="color: #a855f7; margin-top: 0; display:flex; justify-content:space-between;">
+          <span>Step 5. WebHacking - Network Diagnosis Tool</span>
+          <span style="font-size:0.8em; opacity:0.7; border:1px solid #a855f7; padding:2px 8px; border-radius:12px;">Level: Very Hard</span>
+        </h4>
+        <p><strong>목표:</strong> Flag 값을 조합해내고 최종 플래그 값 획득</p>
+        <p>해당 문제는 네트워크 진단 도구를 이용한 문제입니다.</p>
+        <p>문제에 들어가게 되면 진단할 IP 주소를 입력할 수 있습니다. 여기에 아무 주소나 넣고 핑테스트 버튼을 누르면 진단결과가 뜨는 것을 확인할 수 있습니다.</p>
+        <p>sleep 명령어를 이용해 if 문으로 참 거짓을 판별하여 플래그 값을 찾을 수 있습니다.</p>
+        <img src="part3-image/wargame/wvh-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <p>페이지 소스를 확인해보면, flag 텍스트파일의 위치를 알 수 있습니다.</p>
+        <img src="part3-image/wargame/wvh-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <p>cat 으로 sleep 5 를 걸어서 맞다면 5초뒤 진단결과 텍스트가 뜨고, 아니라면 딜레이없이 바로 진단결과 메시지가 나오는 것을 확인할 수 있습니다.</p>
+        <p>이것으로 첫번째 글자부터 끝까지 찾을 수 있습니다.</p>
+        <p><code>8.8.8.8; cat /opt/ping_flag.txt | cut -c 1 | grep -x "F" && sleep 5</code> 라는 코드를 보내보면, 5초의 딜레이 후 진단결과 텍스트가 나타나는 것을 확인해볼 수 있습니다.</p>
+        <img src="part3-image/wargame/wvh-3.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <p>이러한 작업을 반복하여 FLAG 값을 확인할 수 있습니다.</p>
+      </div>
+    `,
+    images: [
+      { src: "part3-image/wargame/password1234-wargame.PNG", caption: "Password1234 Wargame 메인" },
+      { src: "part3-image/wargame/seasy2.png", caption: "SystemHacking - easy2" },
+      { src: "part3-image/wargame/wnoob2.png", caption: "WebHacking - noob2" },
+      { src: "part3-image/wargame/wnormal2.png", caption: "WebHacking - normal2" },
+      { src: "part3-image/wargame/whard2.png", caption: "WebHacking - hard2 " },
+      { src: "part3-image/wargame/wveryhard1.png", caption: "WebHacking - Very hard1" }
+    ]
+  },
 ];
 
 // 2. DOM 요소 선택
@@ -390,7 +577,8 @@ const tabs = document.querySelectorAll('.tab-btn');
 const categoryLabels = {
   phase1: 'Phase 1. Foundation',
   phase2: 'Phase 2. Integration',
-  phase3: 'Phase 3. Analysis'
+  phase3: 'Phase 3. Analysis',
+  phase4: 'Phase 4. Team Project'
 };
 
 // 3. 렌더링 함수
@@ -452,14 +640,17 @@ function getPhaseColor(category) {
   if (category === 'phase1') return '#22d3ee';
   if (category === 'phase2') return '#a855f7';
   if (category === 'phase3') return '#f472b6';
+  if (category === 'phase4') return '#fb923c';
   return '#94a3b8';
 }
 
 function updateCounts() {
   document.getElementById('count-all').textContent = portfolioData.length;
-  ['phase1', 'phase2', 'phase3'].forEach(cat => {
+  // 배열 안에 'phase4' 추가
+  ['phase1', 'phase2', 'phase3', 'phase4'].forEach(cat => {
     const count = portfolioData.filter(p => p.category === cat).length;
-    document.getElementById(`count-${cat}`).textContent = count;
+    const badge = document.getElementById(`count-${cat}`);
+    if(badge) badge.textContent = count; // 에러 방지를 위해 if문 살짝 보강
   });
 }
 
@@ -503,9 +694,39 @@ function openModal(id) {
     htmlContentBox.style.display = 'none';
   }
   
+  if (project.downloads && project.downloads.length > 0) {
+    const downloadSection = document.createElement('div');
+    downloadSection.className = 'download-section';
+    
+    let buttonsHTML = `
+      <div class="download-title"><i class="ph-bold ph-download"></i> 자료 다운로드</div>
+      <div class="btn-group">
+    `;
+    
+    if (project.downloadDesc) {
+      buttonsHTML += `<p class="download-description">${project.downloadDesc}</p>`;
+    }
+    
+    buttonsHTML += `<div class="btn-group">`;
+    project.downloads.forEach(file => {
+      // target="_blank"를 추가하여 새 창에서 열리도록 변경했습니다.
+      buttonsHTML += `
+        <a href="${file.src}" target="_blank" class="btn-download-modal">
+          <i class="ph-bold ph-file-arrow-down"></i> ${file.name}
+        </a>
+      `;
+    });
+
+    buttonsHTML += `</div>`;
+    downloadSection.innerHTML = buttonsHTML;
+    
+    htmlContentBox.appendChild(downloadSection);
+  }
+  
   if (project.category === 'phase1') modalIcon.className = 'ph-fill ph-tree-structure';
   else if (project.category === 'phase2') modalIcon.className = 'ph-fill ph-circles-three-plus';
   else if (project.category === 'phase3') modalIcon.className = 'ph-fill ph-skull';
+  else if (project.category === 'phase4') modalIcon.className = 'ph-fill ph-users-three';
   else modalIcon.className = 'ph-fill ph-code';
 
   // 캐러셀 설정
@@ -592,3 +813,49 @@ window.addEventListener('scroll', () => {
 
 updateCounts();
 renderProjects('all');
+
+// ================= [ 이력서 뷰어 로직 ] =================
+const resumeTrack = document.getElementById('resume-track');
+const resumePages = document.querySelectorAll('.resume-page');
+const resumePrevBtn = document.getElementById('resume-prev');
+const resumeNextBtn = document.getElementById('resume-next');
+const resumeIndicator = document.getElementById('resume-page-indicator');
+
+let currentResumePage = 0;
+const totalResumePages = resumePages.length;
+
+function updateResumeView() {
+  if(totalResumePages === 0) return;
+  
+  // 슬라이드 이동
+  resumeTrack.style.transform = `translateX(-${currentResumePage * 100}%)`;
+  
+  // 페이지 번호 업데이트
+  resumeIndicator.textContent = `Page ${currentResumePage + 1} / ${totalResumePages}`;
+
+  // 버튼 활성화/비활성화 (투명도 조절)
+  resumePrevBtn.style.opacity = currentResumePage === 0 ? '0.3' : '1';
+  resumePrevBtn.style.cursor = currentResumePage === 0 ? 'default' : 'pointer';
+  
+  resumeNextBtn.style.opacity = currentResumePage === totalResumePages - 1 ? '0.3' : '1';
+  resumeNextBtn.style.cursor = currentResumePage === totalResumePages - 1 ? 'default' : 'pointer';
+}
+
+if (resumePrevBtn && resumeNextBtn) {
+  resumePrevBtn.addEventListener('click', () => {
+    if (currentResumePage > 0) {
+      currentResumePage--;
+      updateResumeView();
+    }
+  });
+
+  resumeNextBtn.addEventListener('click', () => {
+    if (currentResumePage < totalResumePages - 1) {
+      currentResumePage++;
+      updateResumeView();
+    }
+  });
+
+  // 초기 실행
+  updateResumeView();
+}
