@@ -385,7 +385,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
     id: 'p4_ctf_web',
     category: 'phase4',
     title: 'CTF Team Project - Web Hacking',
-    desc: '팀 프로젝트: 스테가노그래피 분석 및 SQL Injection을 통한 관리자 계정 탈취 (Web Part)',
+    desc: '팀 프로젝트: CTF 를 제작하여 웹사이트로 취약점을 분석하여 Root 권한 탈취',
     tech: ['SQLmap', 'Fuzzing', 'Gobuster', 'Blind Injection'],
     // ★ 다운로드할 파일 목록 추가
     
