@@ -496,7 +496,6 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
         <p>들어가자마자 보이는 화면의 글자에 드래그를 해볼 수 있습니다.</p>
         <img src="part3-image/wargame/wn-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
         <p>곧바로 플래그 값을 획득할 수 있었습니다.</p>
-        <img src="part3-image/wargame/wn-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
       </div>
 
       <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #f472b6; border-radius: 4px; padding: 20px; margin-top: 25px;">
@@ -539,22 +538,22 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
         <img src="part3-image/wargame/wh-7.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="hard2">
       </div>
 
-      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #a855f7; border-radius: 4px; padding: 20px; margin-top: 25px;">
-        <h4 style="color: #a855f7; margin-top: 0; display:flex; justify-content:space-between;">
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #ef4444; border-radius: 4px; padding: 20px; margin-top: 25px;">
+        <h4 style="color: #ef4444; margin-top: 0; display:flex; justify-content:space-between;">
           <span>Step 5. WebHacking - Network Diagnosis Tool</span>
-          <span style="font-size:0.8em; opacity:0.7; border:1px solid #a855f7; padding:2px 8px; border-radius:12px;">Level: Very Hard</span>
+          <span style="font-size:0.8em; opacity:0.7; border:1px solid #ef4444; padding:2px 8px; border-radius:12px;">Level: Very Hard</span>
         </h4>
         <p><strong>목표:</strong> Flag 값을 조합해내고 최종 플래그 값 획득</p>
         <p>해당 문제는 네트워크 진단 도구를 이용한 문제입니다.</p>
         <p>문제에 들어가게 되면 진단할 IP 주소를 입력할 수 있습니다. 여기에 아무 주소나 넣고 핑테스트 버튼을 누르면 진단결과가 뜨는 것을 확인할 수 있습니다.</p>
         <p>sleep 명령어를 이용해 if 문으로 참 거짓을 판별하여 플래그 값을 찾을 수 있습니다.</p>
-        <img src="part3-image/wargame/wvh-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <img src="part3-image/wargame/wvh-1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="very hard 1">
         <p>페이지 소스를 확인해보면, flag 텍스트파일의 위치를 알 수 있습니다.</p>
-        <img src="part3-image/wargame/wvh-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <img src="part3-image/wargame/wvh-2.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="very hard 2">
         <p>cat 으로 sleep 5 를 걸어서 맞다면 5초뒤 진단결과 텍스트가 뜨고, 아니라면 딜레이없이 바로 진단결과 메시지가 나오는 것을 확인할 수 있습니다.</p>
         <p>이것으로 첫번째 글자부터 끝까지 찾을 수 있습니다.</p>
         <p><code>8.8.8.8; cat /opt/ping_flag.txt | cut -c 1 | grep -x "F" && sleep 5</code> 라는 코드를 보내보면, 5초의 딜레이 후 진단결과 텍스트가 나타나는 것을 확인해볼 수 있습니다.</p>
-        <img src="part3-image/wargame/wvh-3.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="noob2">
+        <img src="part3-image/wargame/wvh-3.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="very hard 3">
         <p>이러한 작업을 반복하여 FLAG 값을 확인할 수 있습니다.</p>
       </div>
     `,
