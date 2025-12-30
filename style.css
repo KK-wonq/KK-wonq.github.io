@@ -418,9 +418,20 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
   border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   border: 1px solid var(--border);
 }
+/* --- [수정] 이력서 뷰어 크기 조절 --- */
 .resume-carousel-container {
-  position: relative; overflow: hidden; border-radius: 8px;
-  background: #fff; aspect-ratio: 1 / 1.414; /* A4 Ratio */
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  
+  /* ★ 핵심 수정: 너비를 550px로 제한하면 높이도 적당해집니다 */
+  width: 100%;
+  max-width: 550px;       /* 너무 크면 이 숫자를 더 줄이세요 (예: 500px) */
+  aspect-ratio: 1 / 1.414; /* A4 비율 유지 (가로:세로) */
+  margin: 0 auto;         /* 화면 가운데 정렬 */
+  
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* 살짝 그림자 추가해서 종이 느낌 */
 }
 .resume-track {
   display: flex; transition: transform 0.4s ease-in-out; height: 100%;
