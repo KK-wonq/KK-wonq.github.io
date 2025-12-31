@@ -971,3 +971,59 @@ if (resumePrevBtn && resumeNextBtn) {
   // 초기 실행
   updateResumeView();
 }
+// ================= [ 이미지 확대 기능 (Lightbox) 로직 ] =================
+
+// 요소 선택
+const viewer = document.getElementById('image-viewer');
+const fullImg = document.getElementById('full-image');
+const captionText = document.getElementById('caption-text');
+const closeViewerBtn = document.getElementsByClassName('close-viewer')[0];
+
+// 1. 문서 전체에서 클릭 이벤트 감지 (동적으로 생성된 이미지도 처리하기 위함)
+document.addEventListener('click', function(e) {
+  // 클릭한 요소가 'img' 태그이고, 모달 내부나 카드 이미지인 경우
+  if (e.target.tagName === 'IMG') {
+    // 로고나 아이콘 등 확대하면 안 되는 이미지는 제외 (필요시 클래스로 구분 가능)
+    // 여기서는 간단히 'modal-html-content' 내부의 이미지거나 'card-img' 클래스인 경우만 확대
+    if (e.target.closest('#modal-html-content') || e.target.classList.contains('card-img')) {
+      
+      viewer.style.display = "flex"; // 뷰어 열기
+      fullImg.src = e.target.src;    // 클릭한 이미지 주소를 가져옴
+      captionText.innerHTML = e.target.alt; // alt 태그 내용을 설명으로 표시
+      
+      // 스크롤 방지
+      document.body.style.overflow = "hidden";
+    }
+  }
+});
+
+// 2. 닫기 버튼(X) 클릭 시 닫기
+closeViewerBtn.onclick = function() {
+  viewer.style.display = "none";
+  // 스크롤 방지 해제 (단, 프로젝트 모달이 열려있다면 모달 스크롤은 유지해야 하므로 조건 처리)
+  if(modalOverlay.classList.contains('active')) {
+      // 프로젝트 모달이 떠있는 상태라면 body 스크롤은 여전히 막혀있어야 함 (아무것도 안 함)
+  } else {
+      document.body.style.overflow = "auto";
+  }
+}
+
+// 3. 검은 배경 클릭 시 닫기
+viewer.onclick = function(e) {
+  if (e.target === viewer) {
+    viewer.style.display = "none";
+    if(!modalOverlay.classList.contains('active')) {
+        document.body.style.overflow = "auto";
+    }
+  }
+}
+
+// 4. ESC 키 누르면 닫기
+document.addEventListener('keydown', function(e) {
+  if (e.key === "Escape" && viewer.style.display === "flex") {
+    viewer.style.display = "none";
+    if(!modalOverlay.classList.contains('active')) {
+        document.body.style.overflow = "auto";
+    }
+  }
+});
