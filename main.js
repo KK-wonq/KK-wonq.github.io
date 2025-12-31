@@ -442,7 +442,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
       { src: "part3-image/ctf/ctf-1.png", caption: "CTF 첫 화면" },
     ]
   },
-  // ================= [ Phase 3 : Wargame (개인 연구) ] =================
+  // ================= [ Phase 4 : Wargame (개인 연구) ] =================
   {
     id: 'p3_wargame_pw1234',
     category: 'phase4',
@@ -564,6 +564,122 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
       { src: "part3-image/wargame/wnormal2.png", caption: "WebHacking - normal2" },
       { src: "part3-image/wargame/whard2.png", caption: "WebHacking - hard2 " },
       { src: "part3-image/wargame/wveryhard1.png", caption: "WebHacking - Very hard1" }
+    ]
+  },
+  {
+    id: 'p4_team_jangbogo',
+    category: 'phase4',
+    title: '가상 커머스 "장보고마켓" 보안 구축 및 대응',
+    desc: '팀 프로젝트: 전자상거래 서비스 풀스택 구축부터 취약점 진단, WAF 차단 및 Splunk 보안 관제 시스템 구축',
+    tech: ['WAF', 'ModSecurity', 'Splunk', 'Docker', 'SIEM', 'Team Project'],
+    downloadDesc: '아래 버튼을 클릭하여 팀프로젝트 전체 결과 보고서, 구현한 웹 및 모바일 취약점 정리 보고서, 취약점 공격 및 탐지 보고서 파일을 다운로드 받을 수 있습니다.',
+    downloads: [
+      { 
+        name: '보안 취약점 정리(웹 및 모바일) 보고서 (PDF)', 
+        src: 'part3-image/hack/document/보안_취약점_정리(웹&모바일).pdf' 
+      },
+      { 
+        name: '웹&모바일 취약점 공격 및 탐지 결과 보고서 (PDF)', 
+        src: 'part3-image/hack/document/웹_취약점_공격_및_탐지.pdf' 
+      },
+      { 
+        name: 'Splunk 구축 보고서 (PDF)', 
+        src: 'part3-image/hack/document/Splunk_로그_구축_이야기.pdf' 
+      },
+      { 
+        name: '팀프로젝트 모의해킹 프로젝트 전체 보고서 (PDF)', 
+        src: 'part3-image/hack/document/팀패스워드_모의해킹_보고서.pdf' 
+      },
+      
+    ],
+    htmlContent: `
+      <h2>1. 프로젝트 개요</h2>
+      <p>가상 전자상거래 서비스 "장보고마켓"을 직접 구축하고, 실제 공격 시나리오를 기반으로 취약점을 진단 및 방어하는 프로젝트를 수행했습니다.</p>
+      <img src="port_images/team_project/hacking_2.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="프로젝트 개요">
+
+      <h3 style="margin-top: 30px;">맡은 역할과 활동</h3>
+      <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
+        <ul style="list-style: none; padding-left: 0; color: #cbd5e1;">
+          <li style="margin-bottom: 8px;"><strong>👑 팀장 이혜원:</strong> 전체 일정 관리, Frontend/Backend 구현, WAF 및 Splunk 구축</li>
+        </ul>
+      </div>
+      <img src="part3-image/hack/hacking_1.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="팀원 소개">
+
+      <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+
+      <h2>2. 대상 시스템 구성 (Architecture)</h2>
+      <p>외부망(Web/Mobile)에서 방화벽, WAF, IDS/IPS를 거쳐 내부망(Web/DB)으로 접근하는 3계층 보안 아키텍처를 설계했습니다. 또한 별도의 보안 관제망을 두어 ELK Stack과 Wazuh로 로그를 중앙 집중화했습니다.</p>
+      <img src="part3_image/hack/hacking_3.jpg" style="width:100%; border-radius:8px; margin-top:10px;" alt="시스템 구성도">
+
+      <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+
+      <h2>3. 주요 취약점 분석 및 대응: CSRF</h2>
+      <p>프로젝트 중 식별된 주요 취약점 중 하나인 <strong>CSRF(Cross Site Request Forgery)</strong> 공격과 이를 보안 장비(WAF)로 방어한 사례입니다.</p>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #ef4444; border-radius: 4px; padding: 20px; margin-top: 20px;">
+        <h4 style="color: #ef4444; margin-top: 0;">Step 1. 공격 시나리오 (Attack)</h4>
+        <p>공격자는 관리자나 일반 사용자가 의도치 않게 상품 정보를 수정하거나 등록하도록 유도하는 악성 폼(Form) 페이지를 작성했습니다.</p>
+        <p>아래 코드는 <code>document.attackForm.submit()</code> 자바스크립트를 이용해 페이지 로드 즉시 POST 요청을 보내는 공격 코드입니다.</p>
+        <img src="part3_images/hack/csrf1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="CSRF 공격 코드">
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #22d3ee; border-radius: 4px; padding: 20px; margin-top: 20px;">
+        <h4 style="color: #22d3ee; margin-top: 0;">Step 2. 보안 대응 및 결과 (Defense)</h4>
+        
+        <p><strong>1. ModSecurity 보안 룰 설정 (Whitelist)</strong></p>
+        <p>CSRF 공격을 방어하기 위해 <code>Referer</code>와 <code>Origin</code> 헤더를 검증하는 커스텀 룰을 적용했습니다.</p>
+        <img src="part3-image/hack/csrf-waf.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="WAF 룰 설정">
+        <ul style="color: #cbd5e1; font-size: 0.9em; margin-top: 10px; margin-bottom: 20px;">
+             <li><strong>Rule 10051~10052:</strong> 신뢰할 수 있는 도메인(jangbogo.com 등)인 경우 검증을 통과(Pass)시킵니다.</li>
+             <li><strong>Rule 10053:</strong> 위 검증을 통과하지 못한 상태에서 데이터 변경 요청(POST 등)이 들어오면 <strong>403 Forbidden</strong>으로 차단합니다.</li>
+        </ul>
+
+        <p><strong>2. 차단 결과 확인</strong></p>
+        <p>공격 스크립트가 실행되었을 때, WAF가 비정상적인 요청(Origin/Referer 불일치)을 감지하고 차단했습니다.</p>
+        
+        <p style="margin-top:15px; font-weight:bold; color:#cbd5e1;">[WAF 차단 로그]</p>
+        <p>로그에서 <code>Pattern match "CSRF Attack Detected"</code> 메시지와 함께 403 Forbidden 코드로 접근이 거부된 것을 확인할 수 있습니다.</p>
+        <img src="part3-image/hack/csrf3.png" style="width:100%; border-radius:6px; margin-top:5px;" alt="WAF 로그">
+
+        <p style="margin-top:15px; font-weight:bold; color:#cbd5e1;">[차단 화면]</p>
+        <img src="part3_image/hack/csrf2.png" style="width:100%; border-radius:6px; margin-top:5px;" alt="403 Forbidden">
+      </div>
+
+      <hr style="border-color: rgba(255,255,255,0.1); margin: 40px 0;">
+
+      <h2>4. 통합 보안 관제 시스템 구축 (Splunk)</h2>
+      <p>단편적인 로그 확인의 한계를 극복하기 위해 <strong>Docker 기반의 Splunk 환경</strong>을 구축하고, 실시간 위협 탐지 대시보드를 구현했습니다.</p>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #22c55e; border-radius: 4px; padding: 20px; margin-top: 20px;">
+        <h4 style="color: #22c55e; margin-top: 0;">Step 1. 환경 구축 및 로그 연동</h4>
+        <p>Ubuntu 서버에 Docker 컨테이너로 Splunk Enterprise를 설치하고, 웹 서버(Rocky Linux)에는 Universal Forwarder를 설치하여 로그 수집 체계를 구성했습니다.</p>
+        
+        <ul style="color: #cbd5e1; font-size: 0.9em; margin-top: 10px;">
+             <li><strong>설치:</strong> RPM 패키지를 이용한 Splunk Forwarder 설치 (Linux)</li>
+             <li><strong>연동:</strong> <code>./splunk add monitor</code> 명령어로 WAF 로그(modsec_audit.log)를 실시간 포워딩</li>
+        </ul>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+            <img src="part3-image/hack/splunk2.png" style="width:100%; border-radius:6px;" alt="Splunk 설치">
+            <img src="part3-image/hack/splunk3.png" style="width:100%; border-radius:6px;" alt="로그 모니터링 추가">
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #22c55e; border-radius: 4px; padding: 20px; margin-top: 20px;">
+        <h4 style="color: #22c55e; margin-top: 0;">Step 2. 위협 데이터 분석 및 시각화</h4>
+        <p>수집된 WAF 로그를 정규표현식(Rex)으로 필드 파싱하여 <strong>공격 유형별 통계</strong>를 시각화했습니다.</p>
+        
+        <p style="margin-top:15px; font-weight:bold; color:#cbd5e1;">[탐지된 주요 공격]</p>
+        <p>Splunk 검색어(SPL)를 이용해 <code>CSRF Attack</code>, <code>XSS Attack</code> 등의 키워드를 추출하여 통계 테이블을 생성했습니다.</p>
+        <img src="part3-image/hack/splunk5.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="공격 탐지 통계">
+      </div>
+    `,
+    images: [
+      { src: "part3-image/hack/hacking_1.png", caption: "팀원 역할 소개" },
+      { src: "part3-image/hack/hacking_2.png", caption: "프로젝트 개요" },
+      { src: "part3_image/hack/hacking_3.jpg", caption: "시스템 아키텍처" },
+      { src: "part3-image/hack/csrf-waf.png", caption: "WAF 보안 정책 설정" },
+      { src: "part3-image/hack/splunk4.png", caption: "Splunk 로그 검색 화면" },
+      { src: "part3-image/hack/splunk5.png", caption: "위협 탐지 현황 대시보드" }
     ]
   },
 ];
