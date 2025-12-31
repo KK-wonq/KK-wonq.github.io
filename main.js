@@ -595,7 +595,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
     htmlContent: `
       <h2>1. 프로젝트 개요</h2>
       <p>가상 전자상거래 서비스 "장보고마켓"을 직접 구축하고, 실제 공격 시나리오를 기반으로 취약점을 진단 및 방어하는 프로젝트를 수행했습니다.</p>
-      <img src="part3-images/team_project/hacking_2.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="프로젝트 개요">
+      <img src="part3-images/hack/hacking_2.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="프로젝트 개요">
 
       <h3 style="margin-top: 30px;">맡은 역할과 활동</h3>
       <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
