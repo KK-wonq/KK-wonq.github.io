@@ -595,7 +595,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
     htmlContent: `
       <h2>1. 프로젝트 개요</h2>
       <p>가상 전자상거래 서비스 "장보고마켓"을 직접 구축하고, 실제 공격 시나리오를 기반으로 취약점을 진단 및 방어하는 프로젝트를 수행했습니다.</p>
-      <img src="port_images/team_project/hacking_2.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="프로젝트 개요">
+      <img src="part3-images/team_project/hacking_2.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="프로젝트 개요">
 
       <h3 style="margin-top: 30px;">맡은 역할과 활동</h3>
       <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
@@ -609,7 +609,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
 
       <h2>2. 대상 시스템 구성 (Architecture)</h2>
       <p>외부망(Web/Mobile)에서 방화벽, WAF, IDS/IPS를 거쳐 내부망(Web/DB)으로 접근하는 3계층 보안 아키텍처를 설계했습니다. 또한 별도의 보안 관제망을 두어 ELK Stack과 Wazuh로 로그를 중앙 집중화했습니다.</p>
-      <img src="part3_image/hack/hacking_3.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="시스템 구성도">
+      <img src="part3-image/hack/hacking_3.png" style="width:100%; border-radius:8px; margin-top:10px;" alt="시스템 구성도">
 
       <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
 
@@ -620,7 +620,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
         <h4 style="color: #ef4444; margin-top: 0;">Step 1. 공격 시나리오 (Attack)</h4>
         <p>공격자는 관리자나 일반 사용자가 의도치 않게 상품 정보를 수정하거나 등록하도록 유도하는 악성 폼(Form) 페이지를 작성했습니다.</p>
         <p>아래 코드는 <code>document.attackForm.submit()</code> 자바스크립트를 이용해 페이지 로드 즉시 POST 요청을 보내는 공격 코드입니다.</p>
-        <img src="part3_image/hack/csrf1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="CSRF 공격 코드">
+        <img src="part3-image/hack/csrf1.png" style="width:100%; border-radius:6px; margin-top:10px;" alt="CSRF 공격 코드">
       </div>
 
       <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #22d3ee; border-radius: 4px; padding: 20px; margin-top: 20px;">
@@ -642,7 +642,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
         <img src="part3-image/hack/csrf3.png" style="width:100%; border-radius:6px; margin-top:5px;" alt="WAF 로그">
 
         <p style="margin-top:15px; font-weight:bold; color:#cbd5e1;">[차단 화면]</p>
-        <img src="part3_image/hack/csrf2.png" style="width:100%; border-radius:6px; margin-top:5px;" alt="403 Forbidden">
+        <img src="part3-image/hack/csrf2.png" style="width:100%; border-radius:6px; margin-top:5px;" alt="403 Forbidden">
       </div>
 
       <hr style="border-color: rgba(255,255,255,0.1); margin: 40px 0;">
@@ -676,7 +676,7 @@ https://github.com/juice-shop/juicy-chat-bot/blob/master 이 사이트로 가면
     images: [
       { src: "part3-image/hack/hacking_1.png", caption: "팀원 역할 소개" },
       { src: "part3-image/hack/hacking_2.png", caption: "프로젝트 개요" },
-      { src: "part3_image/hack/hacking_3.png", caption: "시스템 아키텍처" }
+      { src: "part3-image/hack/hacking_3.png", caption: "시스템 아키텍처" }
     ]
   },
 ];
