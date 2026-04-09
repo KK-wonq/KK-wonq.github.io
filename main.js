@@ -234,7 +234,7 @@ const portfolioData = [
     images: [
       { src: "part2-image/wazuh,go,pmm/nail.png", caption: "통합 로그 분석" },
       { src: "part2-image/wazuh,go,pmm/pmm.png", caption: "PMM 에이전트 등록 연결" },
-      { src: "port2-images/wazuh,go,pmm/wazuh-nail.png", caption: "Wazuh" },
+      { src: "port2-image/wazuh,go,pmm/wazuh-nail.png", caption: "Wazuh" },
       { src: "part2-image/wazuh,go,pmm/wazuh-1.png", caption: "Wazuh 이벤트 대시보드" },
       { src: "part2-image/wazuh,go,pmm/wazuh-2.png", caption: "Wazuh 에이전트 연결" },
       { src: "part2-image/wazuh,go,pmm/go-nail.png", caption: "WAF(GoAccess)" },
